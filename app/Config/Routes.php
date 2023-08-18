@@ -39,6 +39,23 @@ $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
 
 $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'AdmController::index');
+    $routes->get('transaksi', 'AdmController::transaksi');
+    $routes->get('laporan_cust', 'AdmController::laporan_cust');
+    $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
+
+    $routes->get('Reklame', 'Reklame::index');
+    $routes->post('Reklame', 'Reklame::create');
+    $routes->get('Reklame/(:num)', 'Reklame::edit/$1');
+    $routes->post('Reklame/(:num)', 'Reklame::update/$1');
+    $routes->get('Reklame/add', 'Reklame::add');
+    $routes->get('Reklame/delete/(:num)', 'Reklame::delete/$1');
+
+    $routes->get('LokasiReklame', 'LokasiReklame::index');
+    $routes->post('LokasiReklame', 'LokasiReklame::create');
+    $routes->get('LokasiReklame/(:num)', 'LokasiReklame::edit/$1');
+    $routes->post('LokasiReklame/(:num)', 'LokasiReklame::update/$1');
+    $routes->get('LokasiReklame/add', 'LokasiReklame::add');
+    $routes->get('LokasiReklame/delete/(:num)', 'LokasiReklame::delete/$1');
 });
 
 /*

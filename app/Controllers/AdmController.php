@@ -10,4 +10,19 @@ class AdmController extends BaseController
     {
         return view('admin/home');
     }
+
+    public function transaksi()
+    {
+        //
+    }
+
+    public function laporan_cust()
+    {
+        //
+    }
+
+    public function laporan_transaksi()
+    {
+        //
+    }
 }
