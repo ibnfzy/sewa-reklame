@@ -69,14 +69,14 @@ class LokasiReklame extends BaseController
             'link_gmap' => $this->request->getPost('link_gmap'),
         ];
 
-        $this->db->table('lokasi_reklame')->insert($data);
+        $this->db->table('lokasi_reklame')->where('id_lokasi', $id)->update($data);
 
         return redirect()->to(base_url('AdminPanel/LokasiReklame'))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
     }
 
     public function delete($id)
     {
-        $this->db->table('lokasi_reklame')->delete($id);
+        $this->db->table('lokasi_reklame')->where('id_lokasi', $id)->delete();
 
         return redirect()->to(base_url('AdminPanel/LokasiReklame'))->with('type-status', 'info')
             ->with('message', 'Data berhasil dihapus');
