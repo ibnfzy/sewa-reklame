@@ -58,6 +58,10 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('LokasiReklame/delete/(:num)', 'LokasiReklame::delete/$1');
 });
 
+$routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('/', 'UserController::index');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
