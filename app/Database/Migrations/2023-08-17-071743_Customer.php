@@ -24,6 +24,13 @@ class Customer extends Migration
             ],
             'password' => [
                 'type' => 'TEXT'
+            ],
+            'alamat' => [
+                'type' => 'TEXT'
+            ],
+            'nomor_wa' => [
+                'type' => 'VARCHAR',
+                'constraint' => 13
             ]
         ]);
 

@@ -35,6 +35,10 @@ $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Admin', 'AdminLogin::index');
     $routes->post('Admin', 'AdminLogin::auth');
     $routes->get('Admin/Destroy', 'AdminLogin::logoff');
+    $routes->get('User', 'UserLogin::index');
+    $routes->get('Signup', 'UserLogin::signup');
+    $routes->post('User', 'UserLogin::auth');
+    $routes->post('Signup', 'UserLogin::save_data');
 });
 
 $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($routes) {
@@ -60,6 +64,7 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
 
 $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'UserController::index');
+    $routes->get('');
 });
 
 /*
