@@ -43,8 +43,10 @@ class Autoload extends AutoloadConfig
      * @phpstan-var array<string, string|list<string>>
      */
     public $psr4 = [
-        APP_NAMESPACE => APPPATH, // For custom app namespace
-        'Config'      => APPPATH . 'Config',
+        APP_NAMESPACE => APPPATH,
+        // For custom app namespace
+        'Config' => APPPATH . 'Config',
+        'CodeIgniterCart' => ROOTPATH . 'vendor/jason-napolitano/codeigniter4-cart-module/src'
     ];
 
     /**

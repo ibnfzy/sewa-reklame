@@ -34,6 +34,10 @@ class TransaksiDetail extends Migration
                 'type' => 'INT',
                 'constraint' => 10
             ],
+            'jenis_desain_reklame' => [
+                'type' => 'VARCHAR',
+                'constraint' => 150
+            ]
         ]);
 
         $this->forge->addKey('id_transaksi_detail', true);
