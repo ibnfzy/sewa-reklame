@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ADMIN LOGIN PAGE</title>
+  <title>PELANGGAN SIGNUP PAGE</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -19,22 +19,22 @@
   <link rel="stylesheet" href="<?= base_url() ?>/node_modules/toastr/build/toastr.min.css">
 </head>
 <style>
-  body.login-page {
-    background: #2193b0;
-    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
-  }
+body.login-page {
+  background: #2193b0;
+  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+}
 
-  .login-card-body,
-  .register-card-body {
-    background-color: rgba(255, 0, 0, 0.4);
-  }
+.login-card-body,
+.register-card-body {
+  background-color: white;
+}
 </style>
 
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo ">
-      <a class="text-white" href="#">LOGIN PAGE</a>
+      <a class="text-white" href="#">PELANGGAN SIGNUP PAGE</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -50,6 +50,37 @@
               </div>
             </div>
           </div>
+
+          <div class="input-group mb-3">
+            <input name="fullname" type="text" class="form-control" placeholder="Nama Lengkap">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input name="alamat" type="text" class="form-control" placeholder="Alamat">
+            <div class="input-group-append">
+              <div class="input-group-text">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">+62</span>
+            </div>
+            <input name="nomor_whatsapp" type="text" class="form-control" placeholder="Nomor Whatsapp">
+            <div class="input-group-append">
+              <div class="input-group-text">
+
+              </div>
+            </div>
+          </div>
+
           <div class="input-group mb-3">
             <input name="password" type="password" class="form-control" placeholder="Password">
             <div class="input-group-append">
@@ -58,10 +89,24 @@
               </div>
             </div>
           </div>
+
+          <div class="input-group mb-3">
+            <input name="confirm_password" type="password" class="form-control" placeholder="Konfirmasi Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
           <div class="row">
             <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" class="btn btn-secondary btn-block">Login</button>
+            <div class="col-12 mb-3">
+              <button type="submit" class="btn btn-secondary btn-block">Daftar</button>
+            </div>
+            <div class="col-12">
+              <a href="<?= base_url('Login/User') ?>" class="btn btn-primary btn-block">Sudah punya akun? Login
+                disini!</a>
             </div>
             <!-- /.col -->
           </div>
@@ -84,23 +129,23 @@
   <script src="<?= base_url('') ?>dist/js/adminlte.min.js"></script>
 
   <script>
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": true,
-      "progressBar": true,
-      "positionClass": "toast-top-right",
-      "preventDuplicates": true,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    };
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
   </script>
 
   <?= $this->renderSection('script'); ?>

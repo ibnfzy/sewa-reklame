@@ -64,7 +64,6 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
 
 $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'UserController::index');
-    $routes->get('');
 });
 
 /*

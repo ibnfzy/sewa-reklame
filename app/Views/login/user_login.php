@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ADMIN LOGIN PAGE</title>
+  <title>PELANGGAN LOGIN PAGE</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -19,22 +19,22 @@
   <link rel="stylesheet" href="<?= base_url() ?>/node_modules/toastr/build/toastr.min.css">
 </head>
 <style>
-  body.login-page {
-    background: #2193b0;
-    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
-  }
+body.login-page {
+  background: #2193b0;
+  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+}
 
-  .login-card-body,
-  .register-card-body {
-    background-color: rgba(255, 0, 0, 0.4);
-  }
+.login-card-body,
+.register-card-body {
+  background-color: rgba(255, 0, 0, 0.4);
+}
 </style>
 
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo ">
-      <a class="text-white" href="#">LOGIN PAGE</a>
+      <a class="text-white" href="#">PELANGGAN LOGIN PAGE</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -60,8 +60,13 @@
           </div>
           <div class="row">
             <!-- /.col -->
-            <div class="col-4">
+            <div class="col-12 mb-3">
               <button type="submit" class="btn btn-secondary btn-block">Login</button>
+            </div>
+
+            <div class="col-12 mb-3">
+              <a href="<?= base_url('Login/Signup') ?>" class="btn btn-primary btn-block">Belum punya akun? Daftar
+                disini!</a>
             </div>
             <!-- /.col -->
           </div>
@@ -84,23 +89,23 @@
   <script src="<?= base_url('') ?>dist/js/adminlte.min.js"></script>
 
   <script>
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": true,
-      "progressBar": true,
-      "positionClass": "toast-top-right",
-      "preventDuplicates": true,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    };
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
   </script>
 
   <?= $this->renderSection('script'); ?>
