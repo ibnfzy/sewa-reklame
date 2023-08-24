@@ -17,4 +17,14 @@ class UserController extends BaseController
     {
         return view('user/home');
     }
+
+    public function transaksi_bs()
+    {
+        return view('user/transaksi_belum_selesai');
+    }
+
+    public function transaksi_selesai()
+    {
+        return view('user/transaksi_selesai');
+    }
 }

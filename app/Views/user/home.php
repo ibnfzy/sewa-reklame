@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-3 col-sm-6 col-12">
       <div class="info-box shadow">
-        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+        <span class="info-box-icon bg-info"><i class="fas fa-ad"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Transaksi Selesai</span>
@@ -17,7 +17,7 @@
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-12">
       <div class="info-box shadow">
-        <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+        <span class="info-box-icon bg-success"><i class="fas fa-hashtag"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Transaksi Belum Selesai</span>
@@ -30,7 +30,7 @@
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-12">
       <div class="info-box shadow">
-        <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+        <span class="info-box-icon bg-warning"><i class="fas fa-times"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Transaksi Gagal</span>
@@ -43,7 +43,7 @@
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-12">
       <div class="info-box shadow">
-        <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+        <span class="info-box-icon bg-danger"><i class="far fa-money-bill-alt"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Total Bayar Transaksi Selesai</span>

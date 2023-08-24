@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class TransaksiDetail extends Migration
 {
@@ -22,6 +23,10 @@ class TransaksiDetail extends Migration
                 'type' => 'INT',
                 'constraint' => 5
             ],
+            'id_customer' => [
+                'type' => 'INT',
+                'constraint' => 5
+            ],
             'fullname' => [
                 'type' => 'VARCHAR',
                 'constraint' => 150
@@ -33,6 +38,14 @@ class TransaksiDetail extends Migration
             'harga' => [
                 'type' => 'INT',
                 'constraint' => 10
+            ],
+            'status_transaksi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 150
+            ],
+            'tgl_proses_checkout' => [
+                'type' => 'DATE',
+                'default' => new RawSql('(CURRENT_DATE)')
             ],
             'jenis_desain_reklame' => [
                 'type' => 'VARCHAR',

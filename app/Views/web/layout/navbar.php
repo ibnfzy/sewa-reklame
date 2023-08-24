@@ -29,7 +29,7 @@ $(document).ready(function() {
     </div>
     <div class="w3ls_logo_products_left1">
       <ul class="phone_email">
-        <li><a href="<?= base_url('Cart'); ?>"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a> </li>
+        <!-- <li><a href="<?= base_url('Cart'); ?>"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a> </li> -->
         <li><i class="fa-solid fa-user"></i><a href="<?= base_url('Login/User'); ?>"> Login</a>
         </li>
         <li><i class="fa-solid fa-user"></i><a href="<?= base_url('Login/Signup'); ?>"> Daftar</a>
