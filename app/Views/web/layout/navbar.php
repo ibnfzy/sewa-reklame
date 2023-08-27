@@ -1,117 +1,70 @@
-<!-- header -->
-
-<!-- script-for sticky-nav -->
-<script>
-$(document).ready(function() {
-  var navoffeset = $(".agileits_header").offset().top;
-  $(window).scroll(function() {
-    var scrollpos = $(window).scrollTop();
-    if (scrollpos >= navoffeset) {
-      $(".agileits_header").addClass("fixed");
-    } else {
-      $(".agileits_header").removeClass("fixed");
-    }
-  });
-
-});
-</script>
-<!-- //script-for sticky-nav -->
-<div class="logo_products" style="background: lightblue;">
+<div class="header">
   <div class="container">
-    <div class="w3ls_logo_products_left">
-      <h4><a href="<?= base_url('/'); ?>"><span>CV Duta Mandiri</span> Advertising</a></h4>
-    </div>
-    <div class="w3ls_logo_products_left1">
-      <ul class="special_items">
-        <li><a href="<?= base_url('/'); ?>">Home</a><i>/</i></li>
-        <li><a href="<?= base_url('/Item'); ?>">Reklame Katalog</a><i></i></li>
-      </ul>
-    </div>
-    <div class="w3ls_logo_products_left1">
-      <ul class="phone_email">
-        <!-- <li><a href="<?= base_url('Cart'); ?>"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a> </li> -->
-        <li><i class="fa-solid fa-user"></i><a href="<?= base_url('Login/User'); ?>"> Login</a>
-        </li>
-        <li><i class="fa-solid fa-user"></i><a href="<?= base_url('Login/Signup'); ?>"> Daftar</a>
-        </li>
-      </ul>
-    </div>
-    <div class="clearfix"> </div>
-  </div>
-</div>
-<!-- //header -->
-<!-- banner -->
-<div class="banner">
-  <div class="w3l_banner_nav_left">
-    <nav class="navbar nav_bottom">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header nav_2">
-        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
-          data-target="#bs-megadropdown-tabs">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-        <ul class="nav navbar-nav nav_1">
-          <li
-            style="position: relative; height: auto; margin-left: 20%; padding-top: 10px; font-weight: bold; padding-bottom: 5px;">
-            Lokasi Reklame</li>
-          <?php
-          $db = \Config\Database::connect();
-          $get = $db->table('lokasi_reklame')->get()->getResultArray();
-          ?>
-          <?php foreach ($get as $item): ?>
-          <li><a href="<?= base_url('KatalogLokasi/' . $item['id_lokasi']); ?>"><?= $item['nama_jalan']; ?></a>
-          </li>
-          <?php endforeach ?>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
-  </div>
-  <div class="w3l_banner_nav_right">
-    <section class="slider">
-      <div class="flexslider">
-        <ul class="slides">
-          <?php if (isset($cr)): ?>
-          <?php foreach ($cr as $item): ?>
-          <li>
-            <div class="w3l_banner_nav_right_banner"
-              style="--imgurl: url('<?= base_url('uploads/' . $item['gambar']) ?>')">
-              <h3
-                style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; color: #84C639; -webkit-font-smoothing: antialiased; font-weight: bold;">
-                <?= $item['header']; ?></h3>
-              <div class="more">
-                <?php if ($item['link_to'] != ''): ?>
-                <a href="<?= $item['link_to'] ?>" class="button--saqui button--round-l button--text-thick"
-                  data-text="Lihat detail">Lihat detail</a>
-                <?php endif ?>
-              </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header-left">
+          <div class="logo">
+            <a href="index.html"><img src="<?= base_url('') ?>images/logo.png" alt="" /></a>
+          </div>
+          <div class="menu">
+            <a class="toggleMenu" href="#"><img src="<?= base_url('') ?>images/nav.png" alt="" /></a>
+            <ul class="nav" id="nav">
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="team.html">Team</a></li>
+              <li><a href="experiance.html">Events</a></li>
+              <li><a href="experiance.html">Experiance</a></li>
+              <li><a href="shop.html">Company</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <div class="clear"></div>
+            </ul>
+            <script type="text/javascript" src="<?= base_url('') ?>js/responsive-nav.js"></script>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="header_right">
+          <!-- start search-->
+          <div class="search-box">
+            <div id="sb-search" class="sb-search">
+              <form>
+                <input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search"
+                  id="search">
+                <input class="sb-search-submit" type="submit" value="">
+                <span class="sb-icon-search"> </span>
+              </form>
             </div>
-          </li>
-          <?php endforeach ?>
-          <?php endif ?>
-        </ul>
+          </div>
+          <!----search-scripts---->
+          <script src="<?= base_url('') ?>js/classie.js"></script>
+          <script src="<?= base_url('') ?>js/uisearch.js"></script>
+          <script>
+          new UISearch(document.getElementById('sb-search'));
+          </script>
+          <!----//search-scripts---->
+          <ul class="icon1 sub-icon1 profile_img">
+            <li><a class="active-icon c1" href="#"> </a>
+              <ul class="sub-icon1 list">
+                <div class="product_control_buttons">
+                  <a href="#"><img src="<?= base_url('') ?>images/edit.png" alt="" /></a>
+                  <a href="#"><img src="<?= base_url('') ?>images/close_edit.png" alt="" /></a>
+                </div>
+                <div class="clear"></div>
+                <li class="list_img"><img src="<?= base_url('') ?>images/1.jpg" alt="" /></li>
+                <li class="list_desc">
+                  <h4><a href="#">velit esse molestie</a></h4><span class="actual">1 x
+                    $12.00</span>
+                </li>
+                <div class="login_buttons">
+                  <div class="check_button"><a href="checkout.html">Check out</a></div>
+                  <div class="login_button"><a href="login.html">Login</a></div>
+                  <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+              </ul>
+            </li>
+          </ul>
+          <div class="clear"></div>
+        </div>
       </div>
-    </section>
-    <!-- flexSlider -->
-    <link rel="stylesheet" href="<?= base_url(''); ?>/assets/css/flexslider.css" type="text/css" media="screen"
-      property="" />
-    <script defer src="<?= base_url(''); ?>/assets/js/jquery.flexslider.js"></script>
-    <script type="text/javascript">
-    $(window).load(function() {
-      $('.flexslider').flexslider({
-        animation: "slide",
-        start: function(slider) {
-          $('body').removeClass('loading');
-        }
-      });
-    });
-    </script>
-    <!-- //flexSlider -->
+    </div>
   </div>
-  <div class="clearfix"></div>
 </div>
