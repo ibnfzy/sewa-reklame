@@ -23,34 +23,34 @@
         $db = \Config\Database::connect();
         ?>
         <?php foreach ($data as $item): ?>
-          <?php $getLink = $db->table('lokasi_reklame')->where('id_lokasi', $item['id_lokasi'])->get()->getRowArray();
+        <?php $getLink = $db->table('lokasi_reklame')->where('id_lokasi', $item['id_lokasi'])->get()->getRowArray();
           ; ?>
-          <tr>
-            <td>
-              <?= $i; ?>
-            </td>
-            <td>
-              <?= $item['nama_reklame']; ?>
-            </td>
-            <td>
-              <?= $item['lokasi']; ?>
-            </td>
-            <td>
-              <a href="<?= $getLink['link_gmap']; ?>" target="_blank" class="btn btn-primary">Buka Link</a>
-            </td>
-            <td>
-              <?= 'Tinggi ' . $item['tinggi_reklame'] . ' x Lebar ' . $item['lebar_reklame']; ?>
-            </td>
-            <td>
-              <div class="btn-group">
-                <a class="btn btn-primary"
-                  href="<?= base_url('AdminPanel/LokasiReklame/' . $item['id_guru']); ?>">Edit</a>
-                <a class="btn btn-danger"
-                  href="<?= base_url('AdminPanel/LokasiReklame/delete/' . $item['id_guru']); ?>">Delete</a>
-              </div>
-            </td>
-          </tr>
-          <?php $i++; ?>
+        <tr>
+          <td>
+            <?= $i; ?>
+          </td>
+          <td>
+            <?= $item['nama_reklame']; ?>
+          </td>
+          <td>
+            <?= $item['lokasi']; ?>
+          </td>
+          <td>
+            <a href="<?= $getLink['link_gmap']; ?>" target="_blank" class="btn btn-primary">Buka Link</a>
+          </td>
+          <td>
+            <?= 'Tinggi ' . $item['tinggi_reklame'] . ' x Lebar ' . $item['lebar_reklame']; ?>
+          </td>
+          <td>
+            <div class="btn-group">
+              <a class="btn btn-primary"
+                href="<?= base_url('AdminPanel/LokasiReklame/' . $item['id_reklame']); ?>">Edit</a>
+              <a class="btn btn-danger"
+                href="<?= base_url('AdminPanel/LokasiReklame/delete/' . $item['id_reklame']); ?>">Delete</a>
+            </div>
+          </td>
+        </tr>
+        <?php $i++; ?>
         <?php endforeach ?>
       </tbody>
     </table>

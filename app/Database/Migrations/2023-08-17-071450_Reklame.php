@@ -46,10 +46,10 @@ class Reklame extends Migration
             ],
             'bentuk_reklame' => [
                 'type' => 'VARCHAR',
-                'cosntraint' => 11
+                'constraint' => 11
             ],
             'harga_reklame' => [
-                'type' => 'MEDIUMINT',
+                'type' => 'INT',
             ],
             'tgl_insert' => [
                 'type' => 'DATE',

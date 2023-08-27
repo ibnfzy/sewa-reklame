@@ -125,3 +125,6 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+public/uploads/index.html
+public/uploads/wallpaperflare.com_wallpaper.jpg
+public/uploads/wp2754860.jpg
