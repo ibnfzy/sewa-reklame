@@ -3,14 +3,6 @@
 
   <div
     class="sidebar os-host os-theme-light os-host-overflow os-host-resize-disabled os-host-transition os-host-overflow-y os-host-scrollbar-horizontal-hidden">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel pb-3 mb-3 d-flex">
-      <div class="image ">
-        <a href="#" class="d-block">Admin</a>
-      </div>
-      <div class="info">
-      </div>
-    </div>
 
     <!-- Sidebar Menu -->
     <nav class="">
@@ -19,7 +11,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link active">
+          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Home
@@ -29,7 +21,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link">
+          <a href="<?= base_url('AdminPanel/LokasiReklame') ?>" class="nav-link">
             <i class="nav-icon fas fa-tag"></i>
             <p>
               Lokasi Reklame
@@ -39,7 +31,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link">
+          <a href="<?= base_url('AdminPanel/Reklame') ?>" class="nav-link">
             <i class="nav-icon fas fa-box-open"></i>
             <p>
               Reklame

@@ -13,21 +13,37 @@
         <select class="form-control" name="id_lokasi" id="">
           <?php $i = 1; ?>
           <?php foreach ($lokasi as $item): ?>
-            <option value="<?= $item['id_lokasi'] ?>"><?= $i . '. ' . $item['nama_jalan'] ?></option>
-            <?php $i++ ?>
+          <option value="<?= $item['id_lokasi'] ?>"><?= $i . '. ' . $item['nama_jalan'] ?></option>
+          <?php $i++ ?>
           <?php endforeach ?>
         </select>
+      </div>
+      <div class="form-group">
+        <label>Bentuk Reklame</label>
+        <select name="bentuk_reklame" id="" class="form-control">
+          <option value="vert">1. Vertikal</option>
+          <option value="horizon">2. Horizontal</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Harga Sewa/Hari</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Rp.</span>
+          </div>
+          <input type="text" class="form-control" name="harga_reklame">
+        </div>
       </div>
       <div class="form-group">
         <label>Nama Reklame</label>
         <input type="text" class="form-control" name="nama_reklame">
       </div>
       <div class="form-group">
-        <label>Tinggi Reklame</label>
+        <label>Tinggi Reklame (Meter)</label>
         <input type="text" class="form-control" name="tinggi_reklame">
       </div>
       <div class="form-group">
-        <label>Lebar Reklame</label>
+        <label>Lebar Reklame (Meter)</label>
         <input type="text" class="form-control" name="lebar_reklame">
       </div>
       <div class="form-group">

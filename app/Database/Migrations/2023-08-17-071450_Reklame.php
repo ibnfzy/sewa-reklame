@@ -44,6 +44,13 @@ class Reklame extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 150
             ],
+            'bentuk_reklame' => [
+                'type' => 'VARCHAR',
+                'cosntraint' => 11
+            ],
+            'harga_reklame' => [
+                'type' => 'MEDIUMINT',
+            ],
             'tgl_insert' => [
                 'type' => 'DATE',
                 'default' => new RawSql('(CURRENT_DATE)')

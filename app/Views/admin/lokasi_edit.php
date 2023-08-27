@@ -14,7 +14,8 @@
       </div>
       <div class="form-group">
         <label>Link Google Map</label>
-        <input type="text" class="form-control" name="link_gmap" value="<?= $data['link_gmap'] ?>">
+        <!-- <input type="text" class="form-control" name="link_gmap" value=""> -->
+        <textarea class="form-control" name="link_gmap" id="" cols="30" rows="10"><?= $data['link_gmap'] ?></textarea>
       </div>
     </div>
     <div class="card-footer">

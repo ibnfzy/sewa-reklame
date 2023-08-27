@@ -10,11 +10,12 @@
     <div class="card-body">
       <div class="form-group">
         <label>Nama Jalan</label>
-        <input type="text" class="form-control" name="nama_jalan">
+        <input type="text" class="form-control" name="nama_jalan" placeholder="Contoh : Jl. Hertasning Baru">
       </div>
       <div class="form-group">
         <label>Link Google Map</label>
-        <input type="text" class="form-control" name="link_gmap">
+        <textarea name="link_gmap" class="form-control" id="" cols="30" rows="10"
+          placeholder="Contoh: https://goo.gl/maps/xxx atau menggunakan iframe/sematkan peta"></textarea>
       </div>
     </div>
     <div class="card-footer">

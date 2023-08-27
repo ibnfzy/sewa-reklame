@@ -22,7 +22,7 @@ class Reklame extends BaseController
 
     public function add()
     {
-        return view('admin/reklame', [
+        return view('admin/reklame_add', [
             'lokasi' => $this->db->table('lokasi_reklame')->get()->getResultArray()
         ]);
     }
@@ -35,6 +35,8 @@ class Reklame extends BaseController
             'gambar' => 'is_image[gambar]|max_size[gambar,2048]',
             'tinggi_reklame' => 'required',
             'lebar_reklame' => 'required',
+            'bentuk_reklame' => 'required',
+            'harga_reklame' => 'required',
             'deskripsi' => 'required',
         ];
 
@@ -56,6 +58,8 @@ class Reklame extends BaseController
             'tinggi_reklame' => $this->request->getPost('tinggi_reklame'),
             'lebar_reklame' => $this->request->getPost('lebar_reklame'),
             'deskripsi' => $this->request->getPost('deskripsi'),
+            'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
+            'harga_reklame' => $this->request->getPost('harga_reklame'),
             'status_reklame' => 'Tersedia',
         ];
 
@@ -84,6 +88,8 @@ class Reklame extends BaseController
                 'tinggi_reklame' => 'required',
                 'lebar_reklame' => 'required',
                 'deskripsi' => 'required',
+                'bentuk_reklame' => 'required',
+                'harga_reklame' => 'required',
             ];
 
             $data = [
@@ -95,6 +101,8 @@ class Reklame extends BaseController
                 'lebar_reklame' => $this->request->getPost('lebar_reklame'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'status_reklame' => 'Tersedia',
+                'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
+                'harga_reklame' => $this->request->getPost('harga_reklame'),
             ];
         } else {
             $rules = [
@@ -103,6 +111,8 @@ class Reklame extends BaseController
                 'tinggi_reklame' => 'required',
                 'lebar_reklame' => 'required',
                 'deskripsi' => 'required',
+                'bentuk_reklame' => 'required',
+                'harga_reklame' => 'required',
             ];
 
             $data = [
@@ -113,6 +123,8 @@ class Reklame extends BaseController
                 'lebar_reklame' => $this->request->getPost('lebar_reklame'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'status_reklame' => 'Tersedia',
+                'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
+                'harga_reklame' => $this->request->getPost('harga_reklame'),
             ];
         }
 

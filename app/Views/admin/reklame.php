@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header">
-    <a href="<?= base_url('AdminPanel/LokasiReklame/add'); ?>" class="btn btn-primary">Tambah Data</a>
+    <a href="<?= base_url('AdminPanel/Reklame/add'); ?>" class="btn btn-primary">Tambah Data</a>
   </div>
   <div class="card-body">
     <table id='datatable' class="table table-bordered table-hover">
