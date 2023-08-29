@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Free Snow Bootstrap Website Template | Home :: w3layouts</title>
+  <title>Website CV Duta Mandiri Advertising</title>
   <link href="<?= base_url('') ?>css/bootstrap.css" rel='stylesheet' type='text/css' />
   <link href="<?= base_url('') ?>css/style.css" rel='stylesheet' type='text/css' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
