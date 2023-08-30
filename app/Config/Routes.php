@@ -31,7 +31,8 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('Lokasi', 'Home::katalog_lokasi');
-$routes->get('Lokasi/(:num)', '');
+$routes->get('Lokasi/(:num)', 'Home::katalog_reklame/$1');
+$routes->get('Reklame/(:num)', 'Home::reklame/$1');
 
 $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Admin', 'AdminLogin::index');

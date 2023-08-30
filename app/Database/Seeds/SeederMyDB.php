@@ -10,5 +10,7 @@ class SeederMyDB extends Seeder
     {
         $this->call('Admin');
         $this->call('Customer');
+        $this->call('LokasiReklame');
+        $this->call('Reklame');
     }
 }
