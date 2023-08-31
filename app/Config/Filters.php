@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\AdminAuth;
+use App\Filters\CustAuth;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -22,7 +23,8 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'admin' => AdminAuth::class
+        'admin' => AdminAuth::class,
+        'cust' => CustAuth::class
     ];
 
     /**
@@ -67,6 +69,12 @@ class Filters extends BaseConfig
             'before' => [
                 'AdminPanel',
                 'AdminPanel/*',
+            ]
+        ],
+        'cust' => [
+            'before' => [
+                'Panel',
+                'Panel/*'
             ]
         ]
     ];

@@ -10,14 +10,10 @@ class TransaksiDetail extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_transaksi_detail' => [
+            'id_transaksi' => [
                 'type' => 'INT',
                 'constraint' => 5,
                 'auto_increment' => true
-            ],
-            'id_transaksi' => [
-                'type' => 'INT',
-                'constraint' => 5
             ],
             'id_reklame' => [
                 'type' => 'INT',
@@ -49,17 +45,18 @@ class TransaksiDetail extends Migration
             ],
             'jenis_desain_reklame' => [
                 'type' => 'VARCHAR',
-                'constraint' => 150
+                'constraint' => 150,
+                'null' => true
             ]
         ]);
 
-        $this->forge->addKey('id_transaksi_detail', true);
+        $this->forge->addKey('id_transaksi', true);
 
-        $this->forge->createTable('transaksi_detail');
+        $this->forge->createTable('transaksi');
     }
 
     public function down()
     {
-        $this->forge->dropTable('transaksi_detail');
+        $this->forge->dropTable('transaksi');
     }
 }

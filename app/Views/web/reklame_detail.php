@@ -70,7 +70,7 @@ $get = $home->review($data['id_reklame']);
               <span>/ Hari:</span>
               <input type="text">
             </ul>
-            <a href="#" name="Submit" class="exclusive">
+            <a href="<?= base_url('Panel/Proses/' . $data['id_reklame']) ?>" name="Submit" class="exclusive">
               <span>Sewa</span>
             </a>
           </div>
@@ -87,21 +87,22 @@ $get = $home->review($data['id_reklame']);
       <div class="row">
         <ul class="team_list">
           <h4>Testimoni / Review
-            (<?= count($get); ?>)
+            (
+            <?= count($get); ?>)
           </h4>
           <?php foreach ($get as $item): ?>
-          <?php $getcustomer = $db->table('customer')->where('id_customer', $item['id_customer'])->get()->getRowArray(); ?>
-          <li>
-            <a href="javascript::void">
-              <?= $getcustomer['fullname']; ?>
-              <?php for ($i = 0; $i < $item['bintang']; $i++): ?>
-              ⭐
-              <?php endfor ?>
-            </a>
-            <p>
-              <?= $item['isi_review']; ?>
-            </p>
-          </li>
+            <?php $getcustomer = $db->table('customer')->where('id_customer', $item['id_customer'])->get()->getRowArray(); ?>
+            <li>
+              <a href="javascript::void">
+                <?= $getcustomer['fullname']; ?>
+                <?php for ($i = 0; $i < $item['bintang']; $i++): ?>
+                  ⭐
+                <?php endfor ?>
+              </a>
+              <p>
+                <?= $item['isi_review']; ?>
+              </p>
+            </li>
           <?php endforeach ?>
 
         </ul>

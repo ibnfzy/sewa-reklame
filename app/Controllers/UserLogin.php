@@ -21,6 +21,8 @@ class UserLogin extends BaseController
     public function auth()
     {
         $session = session();
+        // $session->destroy();
+        // $session->start();
 
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
@@ -29,12 +31,11 @@ class UserLogin extends BaseController
 
         if ($data) {
             $password_data = $data['password'];
-            $id = $data['id_customer'];
 
             $verify = password_verify($password ?? '', $password_data);
 
             if ($verify) {
-                $session->destroy();
+
                 $sessionData = [
                     'id_customer' => $data['id_customer'],
                     'fullname' => $data['fullname'],
@@ -48,10 +49,12 @@ class UserLogin extends BaseController
                 return redirect()->to(base_url('Panel'))->with('type-status', 'info')
                     ->with('message', 'Selamat Datang Kembali ' . $sessionData['fullname']);
             } else {
+                log_message('debug', 'Password Salah');
                 return redirect()->to(base_url('Login/User'))->with('type-status', 'error')
                     ->with('message', 'Password tidak benar');
             }
         } else {
+            log_message('debug', 'Username Salah');
             return redirect()->to(base_url('Login/User'))->with('type-status', 'error')
                 ->with('message', 'Username tidak benar');
         }

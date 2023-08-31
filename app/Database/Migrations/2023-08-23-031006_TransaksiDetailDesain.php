@@ -14,7 +14,7 @@ class TransaksiDetailDesain extends Migration
                 'constraint' => 5,
                 'auto_increment' => true
             ],
-            'id_transaksi_detail' => [
+            'id_transaksi' => [
                 'type' => 'INT',
                 'constraint' => 5,
             ],

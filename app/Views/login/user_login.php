@@ -41,7 +41,7 @@ body.login-page {
       <div class="card-body login-card-body">
         <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
-        <form action="#" method="post">
+        <form action="<?= base_url('Login/User') ?>" method="post">
           <div class="input-group mb-3">
             <input name="username" type="text" class="form-control" placeholder="Username">
             <div class="input-group-append">
@@ -83,8 +83,8 @@ body.login-page {
   <!-- Bootstrap 4 -->
   <script src="<?= base_url('') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <script src="<?= base_url(); ?>/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
-  <script src="<?= base_url() ?>/node_modules/toastr/build/toastr.min.js"></script>
+  <script src="<?= base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="<?= base_url() ?>node_modules/toastr/build/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?= base_url('') ?>dist/js/adminlte.min.js"></script>
 

@@ -42,6 +42,7 @@ $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Signup', 'UserLogin::signup');
     $routes->post('User', 'UserLogin::auth');
     $routes->post('Signup', 'UserLogin::save_data');
+    $routes->get('Destroy', 'UserLogin::logoff');
 });
 
 $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($routes) {
@@ -67,6 +68,10 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
 
 $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'UserController::index');
+    $routes->get('Transaksi', 'UserController::transaksi_bs');
+    $routes->get('Transaksi_', 'UserController::transaksi_selesai');
+    $routes->get('Transaksi/(:num)', 'UserController::transaksi_detail/$1');
+    $routes->get('Proses/(:num)', 'UserController::proses_transaksi/$1');
 });
 
 /*
