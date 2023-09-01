@@ -71,7 +71,8 @@ $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Transaksi', 'UserController::transaksi_bs');
     $routes->get('Transaksi_', 'UserController::transaksi_selesai');
     $routes->get('Transaksi/(:num)', 'UserController::transaksi_detail/$1');
-    $routes->get('Proses/(:num)', 'UserController::proses_transaksi/$1');
+    $routes->post('Proses/(:num)', 'UserController::proses_transaksi/$1');
+    $routes->get('Delete/(:num)', 'UserController::batal_tranasksi/$1');
 });
 
 /*

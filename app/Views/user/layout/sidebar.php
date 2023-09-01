@@ -70,6 +70,13 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="<?= base_url('Lokasi'); ?>" class="nav-link">
+            <i class="nav-icon fas fa-circle"></i>
+            <p>Katalog Lokasi Reklame</p>
+          </a>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

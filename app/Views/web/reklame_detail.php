@@ -66,13 +66,15 @@ $get = $home->review($data['id_reklame']);
             <p class="price2">Rp.
               <?= number_format($data['harga_reklame'], 0, ',', '.'); ?>
             </p>
-            <ul class="prosuct-qty">
-              <span>/ Hari:</span>
-              <input type="text">
-            </ul>
-            <a href="<?= base_url('Panel/Proses/' . $data['id_reklame']) ?>" name="Submit" class="exclusive">
-              <span>Sewa</span>
-            </a>
+            <form action="<?= base_url('Panel/Proses/' . $data['id_reklame']) ?>" method="POST">
+              <ul class="prosuct-qty">
+                <span>/ Hari:</span>
+                <input type="text" name="hari">
+              </ul>
+              <button type="submit" name="Submit" class="exclusive">
+                <span>Sewa</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>

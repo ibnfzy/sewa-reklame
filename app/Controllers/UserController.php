@@ -55,7 +55,8 @@ class UserController extends BaseController
             'fullname' => $_SESSION['fullname'],
             'nama_reklame' => $get['nama_reklame'],
             'harga' => $get['harga_reklame'],
-            'status_transaksi' => 'Desain',
+            'status_transaksi' => 'Penyerahan Desain',
+            'total_hari_sewa' => $this->request->getPost('hari')
         ];
 
         $this->db->table('transaksi')->insert($data);
@@ -63,5 +64,10 @@ class UserController extends BaseController
         return redirect()->to(base_url('Panel/Transaksi'))->with('type-status', 'success')->with('message', 'Transaksi Berhasil dibuat');
     }
 
+    public function batal_tranasksi($id)
+    {
+        $this->db->table('transaksi')->where('id_transaksi', $id)->delete();
 
+        return redirect()->to(base_url('Panel/Transaksi'))->with('type-status', 'success')->with('message', 'Transaksi Berhasil dihapus');
+    }
 }

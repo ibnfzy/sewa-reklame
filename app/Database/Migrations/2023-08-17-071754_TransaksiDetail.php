@@ -47,6 +47,10 @@ class TransaksiDetail extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 150,
                 'null' => true
+            ],
+            'total_hari_sewa' => [
+                'type' => 'INT',
+                'default' => 1
             ]
         ]);
 

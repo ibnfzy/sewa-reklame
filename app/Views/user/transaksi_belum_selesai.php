@@ -33,13 +33,15 @@
                 <td>
                   <?= $item['nama_reklame']; ?>
                 </td>
-                <td>
-                  <?= $item['harga']; ?>
+                <td>Rp.
+                  <?= number_format($item['harga'], 0, ',', '.'); ?>
                 </td>
                 <td>
                   <div class="btn-group">
-                    <a class="btn btn-primary" href="#">Detail Desain Reklame</a>
-                    <a class="btn btn-danger" href="#">Batal Transaksi</a>
+                    <a class="btn btn-primary"
+                      href="<?= base_url('Panel/Transaksi/' . $item['id_transaksi']); ?>">Detail Desain Reklame</a>
+                    <a class="btn btn-danger" href="<?= base_url('Panel/Delete/' . $item['id_transaksi']); ?>">Batal
+                      Transaksi</a>
                   </div>
                 </td>
               </tr>

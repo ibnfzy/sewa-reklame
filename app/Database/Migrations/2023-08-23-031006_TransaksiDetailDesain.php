@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class TransaksiDetailDesain extends Migration
 {
@@ -23,6 +24,14 @@ class TransaksiDetailDesain extends Migration
             ],
             'deskripsi_revisi' => [
                 'type' => 'TEXT'
+            ],
+            'jenis_post' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50
+            ],
+            'tanggal_post' => [
+                'type' => 'DATE',
+                'default' => new RawSql('(CURRENT_DATE)')
             ]
         ]);
 
