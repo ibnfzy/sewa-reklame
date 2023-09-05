@@ -73,6 +73,8 @@ $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Transaksi/(:num)', 'UserController::transaksi_detail/$1');
     $routes->post('Proses/(:num)', 'UserController::proses_transaksi/$1');
     $routes->get('Delete/(:num)', 'UserController::batal_tranasksi/$1');
+    $routes->post('JenisDesain/(:num)', 'UserController::jenis_penyerahan/$1');
+    $routes->post('UploadSendiri/(:num)', 'UserController::upload_desain_sendiri/$1');
 });
 
 /*

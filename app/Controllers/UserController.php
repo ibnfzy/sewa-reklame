@@ -70,4 +70,45 @@ class UserController extends BaseController
 
         return redirect()->to(base_url('Panel/Transaksi'))->with('type-status', 'success')->with('message', 'Transaksi Berhasil dihapus');
     }
+
+    public function jenis_penyerahan($id)
+    {
+        $data = [
+            'jenis_desain_reklame' => $this->request->getPost('jenis')
+        ];
+
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update($data);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Memilih Jenis');
+    }
+
+    public function upload_desain_sendiri($id)
+    {
+        $rules = [
+            'gambar' => 'is_image[gambar]',
+            'deskripsi' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        $extFile = $this->request->getFile('gambar')->guessExtension();
+        $namafile = 'desain-' . $id . date('-dmY.') . $extFile;
+
+        if (!$this->request->getFile('gambar')->hasMoved()) {
+            $this->request->getFile('gambar')->move('uploads', $namafile);
+        }
+
+        $data = [
+            'id_transaksi' => $id,
+            'gambar' => $namafile,
+            'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+            'jenis_post' => 'Desain Sendiri',
+        ];
+
+        $this->db->table('transaksi_detail_desain')->insert($data);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
 }
