@@ -6,7 +6,7 @@
     </li>
     <li class="nav-item">
       <h4>Selamat Datang
-        <?= $_SESSION['fullname'] ?> di Pelanggan Panel
+        <?= $_SESSION['fullname_customer'] ?> di Pelanggan Panel
       </h4>
     </li>
 

@@ -38,8 +38,8 @@ class UserLogin extends BaseController
 
                 $sessionData = [
                     'id_customer' => $data['id_customer'],
-                    'fullname' => $data['fullname'],
-                    'username' => $data['username'],
+                    'fullname_customer' => $data['fullname'],
+                    'username_customer' => $data['username'],
                     'logged_in_customer' => TRUE
                 ];
 
@@ -47,7 +47,7 @@ class UserLogin extends BaseController
                 // $session->markAsTempdata('logged_in_admin', 1800); //timeout 30 menit
 
                 return redirect()->to(base_url('Panel'))->with('type-status', 'info')
-                    ->with('message', 'Selamat Datang Kembali ' . $sessionData['fullname']);
+                    ->with('message', 'Selamat Datang Kembali ' . $sessionData['fullname_customer']);
             } else {
                 log_message('debug', 'Password Salah');
                 return redirect()->to(base_url('Login/User'))->with('type-status', 'error')

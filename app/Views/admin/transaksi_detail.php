@@ -1,4 +1,4 @@
-<?= $this->extend('user/base'); ?>
+<?= $this->extend('admin/base'); ?>
 <?= $this->section('content'); ?>
 
 <?php
@@ -105,7 +105,6 @@ $total = $data['harga'] * $data['total_hari_sewa'];
               <?php endforeach ?>
 
             <?php endif ?>
-
           </div>
         </div>
       </div>
@@ -151,24 +150,19 @@ $total = $data['harga'] * $data['total_hari_sewa'];
 
         </ul>
         <div class="mt-5 mb-3">
-          <?php if ($data['jenis_desain_reklame'] == null): ?>
-            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#penyerahanDesain">Pilih Jenis
-              Penyerahan
-              Desain</a>
+
+          <?php if ($data['status_transaksi'] == 'Menunggu Desain divalidasi'): ?>
+            <a href="<?= base_url('AdminPanel/Validasi/' . $data['id_transaksi']); ?>"
+              class="btn btn-sm btn-warning">Validasi Desain</a>
           <?php endif ?>
 
-          <?php if ($data['jenis_desain_reklame'] == 'Upload Desain Sendiri' && $data['status_transaksi'] == 'Penyerahan Desain'): ?>
-            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#penyerahanDesain">Upload
-              Desain</a>
+          <?php if ($data['status_transaksi'] == 'Menunggu Validasi Bukti Bayar DP'): ?>
+            <a href="<?= base_url('AdminPanel/ValidasiBBDP/' . $data['id_transaksi']); ?>"
+              class="btn btn-sm btn-warning">Validasi
+              Bukti Bayar DP</a>
           <?php endif ?>
 
-          <?php if ($data['status_transaksi'] == 'Penyerahan Desain Berhasil'): ?>
-            <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#uploadBB">Upload Bukti Pembayaran
-              DP</a>
-          <?php endif ?>
-
-          <a href="#" class="btn btn-sm btn-success">Hubungi Admin</a>
-
+          <a href="#" class="btn btn-sm btn-success">Hubungi Pelanggan</a>
         </div>
       </div>
     </div>
@@ -176,96 +170,5 @@ $total = $data['harga'] * $data['total_hari_sewa'];
   <!-- /.card-body -->
 </div>
 
-<?php if ($data['status_transaksi'] == 'Penyerahan Desain Berhasil'): ?>
-  <div class="modal fade" id="uploadBB" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="penyerahanDesainLabel">Upload Bukti Bayar DP</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?= base_url('Panel/UploadBBDP/' . $data['id_transaksi']); ?>" method="post"
-          enctype="multipart/form-data">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Upload</label>
-              <input type="file" class="form-control" name="gambar">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-            <button type="submit" class="btn btn-primary">Proses</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-<?php endif ?>
-
-<?php if ($data['jenis_desain_reklame'] == 'Upload Desain Sendiri'): ?>
-  <div class="modal fade" id="penyerahanDesain" tabindex="-1" role="dialog" aria-labelledby="penyerahanDesainLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="penyerahanDesainLabel">Upload Desain</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?= base_url('Panel/UploadSendiri/' . $data['id_transaksi']); ?>" method="post"
-          enctype="multipart/form-data">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Upload Bukti Bayar DP</label>
-              <input type="file" class="form-control" name="gambar">
-            </div>
-            <div class="form-group">
-              <label for="">Deskripsi Desain</label>
-              <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-            <button type="submit" class="btn btn-primary">Proses</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-<?php endif ?>
-
-<?php if ($data['jenis_desain_reklame'] == null): ?>
-  <div class="modal fade" id="penyerahanDesain" tabindex="-1" role="dialog" aria-labelledby="penyerahanDesainLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="penyerahanDesainLabel">Pilih Jenis Proses Penyerahan Desain</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="<?= base_url('Panel/JenisDesain/' . $data['id_transaksi']); ?>" method="post">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Pilih</label>
-              <select name="jenis" id="jenis" class="form-control" required>
-                <option value="Request Desain">Request Desain</option>
-                <option value="Upload Desain Sendiri">Upload Desain Sendiri</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-            <button type="submit" class="btn btn-primary">Proses</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-<?php endif ?>
 
 <?= $this->endSection(); ?>

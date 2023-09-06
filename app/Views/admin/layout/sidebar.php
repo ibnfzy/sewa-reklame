@@ -41,7 +41,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link">
+          <a href="<?= base_url('AdminPanel/Transaksi') ?>" class="nav-link">
             <i class="nav-icon fas fa-cart-plus"></i>
             <p>
               Transaksi

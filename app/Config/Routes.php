@@ -47,7 +47,10 @@ $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
 
 $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'AdmController::index');
-    $routes->get('transaksi', 'AdmController::transaksi');
+    $routes->get('Transaksi', 'AdmController::transaksi');
+    $routes->get('Transaksi/(:num)', 'AdmController::transaksi_detail/$1');
+    $routes->get('Validasi/(:num)', 'AdmController::validasi_desain/$1');
+    $routes->get('ValidasiBBDP/(:num)', 'AdmController::validasibbdp/$1');
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
 
@@ -75,6 +78,7 @@ $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Delete/(:num)', 'UserController::batal_tranasksi/$1');
     $routes->post('JenisDesain/(:num)', 'UserController::jenis_penyerahan/$1');
     $routes->post('UploadSendiri/(:num)', 'UserController::upload_desain_sendiri/$1');
+    $routes->post('UploadBBDP/(:num)', 'UserController::uploadBBDP/$1');
 });
 
 /*
