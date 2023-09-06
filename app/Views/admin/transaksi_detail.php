@@ -162,13 +162,55 @@ $total = $data['harga'] * $data['total_hari_sewa'];
               Bukti Bayar DP</a>
           <?php endif ?>
 
-          <a href="#" class="btn btn-sm btn-success">Hubungi Pelanggan</a>
+          <a href="#" class="btn btn-sm btn-success mb-2">Hubungi Pelanggan</a>
+
+          <?php if ($data['status_transaksi'] == 'Pengerjaan Reklame Diproses'): ?>
+            <a href="<?= base_url('AdminPanel/PengerjaanSelesai/' . $data['id_transaksi']) ?>"
+              class="btn btn-sm btn-warning mb-2">Pengerjaan
+              Selesai</a>
+
+            <a href="#" class="btn btn-sm btn-primary">Upload Dokumentasi Pemasangan Reklame</a>
+
+          <?php endif ?>
+
         </div>
       </div>
     </div>
   </div>
   <!-- /.card-body -->
 </div>
+
+<?php if ($data['status_transaksi'] == 'Pengerjaan Reklame Diproses'): ?>
+  <div class="modal fade" id="uploadBB" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="penyerahanDesainLabel">Upload Dokumentasi Pemasangan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="<?= base_url('AdminPanel/UploadDok/' . $data['id_transaksi']); ?>" method="post"
+          enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Upload</label>
+              <input type="file" class="form-control" name="gambar">
+            </div>
+            <div class="form-group">
+              <label>Deskripsi Dokuemntasi</label>
+              <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-primary">Proses</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<?php endif ?>
 
 
 <?= $this->endSection(); ?>

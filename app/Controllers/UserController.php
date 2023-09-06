@@ -107,6 +107,12 @@ class UserController extends BaseController
             'jenis_post' => 'Desain Sendiri',
         ];
 
+        $dataTransaksi = [
+            'status_transaksi' => 'Menunggu Desain divalidasi'
+        ];
+
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update($dataTransaksi);
+
         $this->db->table('transaksi_detail_desain')->insert($data);
 
         return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
@@ -136,11 +142,11 @@ class UserController extends BaseController
             'jenis_post' => 'Upload Bukti Bayar'
         ];
 
-        $data = [
+        $dataTransaksi = [
             'status_transaksi' => 'Menunggu Validasi Bukti Bayar DP'
         ];
 
-        $this->db->table('transaksi')->where('id_transaksi', $id)->update($data);
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update($dataTransaksi);
 
         $this->db->table('transaksi_detail_desain')->insert($data);
 

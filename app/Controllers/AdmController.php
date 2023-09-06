@@ -50,6 +50,45 @@ class AdmController extends BaseController
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Bukti Bayar DP');
     }
 
+    public function upload_dokumentasi($id)
+    {
+        $rules = [
+            'gambar' => 'is_image[gambar]',
+            'deskripsi' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        $extFile = $this->request->getFile('gambar')->guessExtension();
+        $namafile = 'dokumentasi-' . $id . date('-dmY.') . $extFile;
+
+        if (!$this->request->getFile('gambar')->hasMoved()) {
+            $this->request->getFile('gambar')->move('uploads', $namafile);
+        }
+
+        $data = [
+            'id_transaksi' => $id,
+            'gambar' => $namafile,
+            'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+            'jenis_post' => 'Dokumentasi',
+        ];
+
+        $this->db->table('transaksi_detail_desain')->insert($data);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
+
+    public function pengerjaan_selesai($id)
+    {
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+            'status_transaksi' => 'Pengerjaan Selesai'
+        ]);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Pengerjaan Selesai');
+    }
+
     public function laporan_cust()
     {
         //

@@ -23,29 +23,29 @@
             <tbody>
               <?php $i = 1; ?>
               <?php foreach ($data as $item): ?>
-              <tr>
-                <td>
-                  <?= $i; ?>
-                </td>
-                <td>
-                  <?= $item['id_transaksi']; ?>
-                </td>
-                <td>
-                  <?= $item['nama_reklame']; ?>
-                </td>
-                <td>Rp.
-                  <?= number_format($item['harga'], 0, ',', '.'); ?>
-                </td>
-                <td>
-                  <div class="btn-group">
-                    <a class="btn btn-primary"
-                      href="<?= base_url('Panel/Transaksi/' . $item['id_transaksi']); ?>">Detail Desain Reklame</a>
-                    <a class="btn btn-danger" href="<?= base_url('Panel/Delete/' . $item['id_transaksi']); ?>">Batal
-                      Transaksi</a>
-                  </div>
-                </td>
-              </tr>
-              <?php $i++; ?>
+                <tr>
+                  <td>
+                    <?= $i; ?>
+                  </td>
+                  <td>
+                    <?= $item['id_transaksi']; ?>
+                  </td>
+                  <td>
+                    <?= $item['nama_reklame']; ?>
+                  </td>
+                  <td>Rp.
+                    <?= number_format($item['harga'] * $item['total_hari_sewa'], 0, ',', '.') . '/' . $item['total_hari_sewa'] . ' Hari' ?>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <a class="btn btn-primary"
+                        href="<?= base_url('Panel/Transaksi/' . $item['id_transaksi']); ?>">Detail Desain Reklame</a>
+                      <a class="btn btn-danger" href="<?= base_url('Panel/Delete/' . $item['id_transaksi']); ?>">Batal
+                        Transaksi</a>
+                    </div>
+                  </td>
+                </tr>
+                <?php $i++; ?>
               <?php endforeach ?>
             </tbody>
           </table>

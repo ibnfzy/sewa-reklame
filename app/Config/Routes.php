@@ -51,6 +51,7 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('Transaksi/(:num)', 'AdmController::transaksi_detail/$1');
     $routes->get('Validasi/(:num)', 'AdmController::validasi_desain/$1');
     $routes->get('ValidasiBBDP/(:num)', 'AdmController::validasibbdp/$1');
+    $routes->get('PengerjaanSelesai/(:num)', 'AdmController::pengerjaan_selesai/$1');
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
 
