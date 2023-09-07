@@ -51,6 +51,13 @@ class Reklame extends Migration
             'harga_reklame' => [
                 'type' => 'INT',
             ],
+            'lightning' => [
+                'type' => 'CHAR',
+                'constraint' => 2
+            ],
+            'formasi' => [
+                'type' => 'CHAR'
+            ],
             'tgl_insert' => [
                 'type' => 'DATE',
                 'default' => new RawSql('(CURRENT_DATE)')

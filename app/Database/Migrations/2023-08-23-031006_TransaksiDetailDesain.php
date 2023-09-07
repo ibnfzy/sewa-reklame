@@ -20,7 +20,8 @@ class TransaksiDetailDesain extends Migration
                 'constraint' => 5,
             ],
             'gambar' => [
-                'type' => 'TEXT'
+                'type' => 'TEXT',
+                'null' => true
             ],
             'deskripsi_revisi' => [
                 'type' => 'TEXT'

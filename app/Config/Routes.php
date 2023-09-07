@@ -52,6 +52,8 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('Validasi/(:num)', 'AdmController::validasi_desain/$1');
     $routes->get('ValidasiBBDP/(:num)', 'AdmController::validasibbdp/$1');
     $routes->get('PengerjaanSelesai/(:num)', 'AdmController::pengerjaan_selesai/$1');
+    $routes->post('UploadDesain/(:num)', 'AdmController::upload_desain/$1');
+
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
 
@@ -80,6 +82,9 @@ $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->post('JenisDesain/(:num)', 'UserController::jenis_penyerahan/$1');
     $routes->post('UploadSendiri/(:num)', 'UserController::upload_desain_sendiri/$1');
     $routes->post('UploadBBDP/(:num)', 'UserController::uploadBBDP/$1');
+    $routes->post('UploadKriteria/(:num)', 'UserController::uploadKriteriaDesain/$1');
+    $routes->get('TerimaDesain/(:num)', 'UserController::terima_desain/$1');
+    $routes->post('UploadRevisi/(:num)', 'UserController::upload_revisi/$1');
 });
 
 /*

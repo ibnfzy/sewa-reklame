@@ -33,11 +33,23 @@ $get = $home->review($data['id_reklame']);
               <?= $total_star ?>)
             </h3>
             <p class="m_10">
-              Tinggi
-              <?= $data['tinggi_reklame']; ?> x Lebar
-              <?= $data['lebar_reklame']; ?> | Bentuk
-              <?= $data['bentuk_reklame']; ?> |
-              <?= $data['lokasi']; ?>
+              <li>Tinggi
+                <?= $data['tinggi_reklame']; ?> M x Lebar
+                <?= $data['lebar_reklame']; ?> M
+              </li>
+              <li>Bentuk
+                <?= $data['bentuk_reklame']; ?>
+              </li>
+              <li>
+                <?= $data['lokasi']; ?>
+              </li>
+              <li>Lightning
+                <?= $data['lightning']; ?> Buah
+              </li>
+              <li>Formasi
+                <?= $data['formasi']; ?> Arah
+              </li>
+
               <br><br>
 
               <?php
@@ -93,18 +105,18 @@ $get = $home->review($data['id_reklame']);
             <?= count($get); ?>)
           </h4>
           <?php foreach ($get as $item): ?>
-            <?php $getcustomer = $db->table('customer')->where('id_customer', $item['id_customer'])->get()->getRowArray(); ?>
-            <li>
-              <a href="javascript::void">
-                <?= $getcustomer['fullname']; ?>
-                <?php for ($i = 0; $i < $item['bintang']; $i++): ?>
-                  ⭐
-                <?php endfor ?>
-              </a>
-              <p>
-                <?= $item['isi_review']; ?>
-              </p>
-            </li>
+          <?php $getcustomer = $db->table('customer')->where('id_customer', $item['id_customer'])->get()->getRowArray(); ?>
+          <li>
+            <a href="javascript::void">
+              <?= $getcustomer['fullname']; ?>
+              <?php for ($i = 0; $i < $item['bintang']; $i++): ?>
+              ⭐
+              <?php endfor ?>
+            </a>
+            <p>
+              <?= $item['isi_review']; ?>
+            </p>
+          </li>
           <?php endforeach ?>
 
         </ul>

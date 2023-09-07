@@ -5,6 +5,7 @@
 $db = \Config\Database::connect();
 $get = $db->table('transaksi_detail_desain')->where('id_transaksi', $data['id_transaksi'])->orderBy('id_transaksi_detail_desain', 'DESC')->get()->getResultArray();
 $total = $data['harga'] * $data['total_hari_sewa'];
+$isUpRefThere = false;
 ?>
 
 <style>
@@ -79,6 +80,7 @@ $total = $data['harga'] * $data['total_hari_sewa'];
             <?php else: ?>
 
               <?php foreach ($get as $item): ?>
+                <?php $isUpRefThere = ($item['jenis_post'] == 'Referensi & Kriteria Desain') ? true : false; ?>
                 <div class="post">
                   <div class="user-block">
                     <span class="username">
@@ -151,6 +153,8 @@ $total = $data['harga'] * $data['total_hari_sewa'];
         </ul>
         <div class="mt-5 mb-3">
 
+          <a href="#" class="btn btn-sm btn-success">Hubungi Pelanggan</a>
+
           <?php if ($data['status_transaksi'] == 'Menunggu Desain divalidasi'): ?>
             <a href="<?= base_url('AdminPanel/Validasi/' . $data['id_transaksi']); ?>"
               class="btn btn-sm btn-warning">Validasi Desain</a>
@@ -162,8 +166,6 @@ $total = $data['harga'] * $data['total_hari_sewa'];
               Bukti Bayar DP</a>
           <?php endif ?>
 
-          <a href="#" class="btn btn-sm btn-success mb-2">Hubungi Pelanggan</a>
-
           <?php if ($data['status_transaksi'] == 'Pengerjaan Reklame Diproses'): ?>
             <a href="<?= base_url('AdminPanel/PengerjaanSelesai/' . $data['id_transaksi']) ?>"
               class="btn btn-sm btn-warning mb-2">Pengerjaan
@@ -173,12 +175,49 @@ $total = $data['harga'] * $data['total_hari_sewa'];
 
           <?php endif ?>
 
+          <?php if ($data['status_transaksi'] == 'Penyerahan Desain' && $data['jenis_desain_reklame'] == 'Request Desain' && $isUpRefThere == true): ?>
+            <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#uploadDesain">Upload Desain
+              Reklame</a>
+          <?php endif ?>
+
         </div>
       </div>
     </div>
   </div>
   <!-- /.card-body -->
 </div>
+
+<?php if ($data['status_transaksi'] == 'Penyerahan Desain' && $data['jenis_desain_reklame'] == 'Request Desain' && $isUpRefThere == true): ?>
+  <div class="modal fade" id="uploadDesain" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="penyerahanDesainLabel">Upload Desain Reklame</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="<?= base_url('AdminPanel/UploadDesain/' . $data['id_transaksi']); ?>" method="post"
+          enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Upload Desain</label>
+              <input type="file" class="form-control" name="gambar">
+            </div>
+            <div class="form-group">
+              <label>Deskripsi Desain</label>
+              <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-primary">Proses</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<?php endif ?>
 
 <?php if ($data['status_transaksi'] == 'Pengerjaan Reklame Diproses'): ?>
   <div class="modal fade" id="uploadBB" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
@@ -198,7 +237,7 @@ $total = $data['harga'] * $data['total_hari_sewa'];
               <input type="file" class="form-control" name="gambar">
             </div>
             <div class="form-group">
-              <label>Deskripsi Dokuemntasi</label>
+              <label>Deskripsi Dokumentasi</label>
               <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control"></textarea>
             </div>
           </div>

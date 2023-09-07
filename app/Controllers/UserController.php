@@ -52,7 +52,7 @@ class UserController extends BaseController
         $data = [
             'id_reklame' => $id,
             'id_customer' => $_SESSION['id_customer'],
-            'fullname' => $_SESSION['fullname'],
+            'fullname' => $_SESSION['fullname_customer'],
             'nama_reklame' => $get['nama_reklame'],
             'harga' => $get['harga_reklame'],
             'status_transaksi' => 'Penyerahan Desain',
@@ -151,5 +151,88 @@ class UserController extends BaseController
         $this->db->table('transaksi_detail_desain')->insert($data);
 
         return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
+
+    public function uploadKriteriaDesain($id)
+    {
+        $rules = [
+            'deskripsi' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        if ($this->request->getFile('gambar')->isValid()) {
+            $extFile = $this->request->getFile('gambar')->guessExtension();
+            $namafile = 'refdesain-' . $id . date('-dmY.') . $extFile;
+
+            if (!$this->request->getFile('gambar')->hasMoved()) {
+                $this->request->getFile('gambar')->move('uploads', $namafile);
+            }
+
+            $data = [
+                'id_transaksi' => $id,
+                'gambar' => $namafile,
+                'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+                'jenis_post' => 'Referensi & Kriteria Desain',
+            ];
+        } else {
+            $data = [
+                'id_transaksi' => $id,
+                'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+                'jenis_post' => 'Referensi & Kriteria Desain',
+            ];
+        }
+
+        $this->db->table('transaksi_detail_desain')->insert($data);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
+
+    public function upload_revisi($id)
+    {
+        $rules = [
+            'deskripsi' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        if ($this->request->getFile('gambar')->isValid()) {
+            $extFile = $this->request->getFile('gambar')->guessExtension();
+            $namafile = 'refdesain-' . $id . date('-dmY.') . $extFile;
+
+            if (!$this->request->getFile('gambar')->hasMoved()) {
+                $this->request->getFile('gambar')->move('uploads', $namafile);
+            }
+
+            $data = [
+                'id_transaksi' => $id,
+                'gambar' => $namafile,
+                'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+                'jenis_post' => 'Revisi Desain',
+            ];
+        } else {
+            $data = [
+                'id_transaksi' => $id,
+                'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+                'jenis_post' => 'Revisi Desain',
+            ];
+        }
+
+        $this->db->table('transaksi_detail_desain')->insert($data);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
+
+    public function terima_desain($id)
+    {
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+            'status_transaksi' => 'Penyerahan Desain Berhasil'
+        ]);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Desain Berhasil Diterima');
     }
 }

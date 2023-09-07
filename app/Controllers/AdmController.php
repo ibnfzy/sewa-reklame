@@ -89,6 +89,36 @@ class AdmController extends BaseController
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Pengerjaan Selesai');
     }
 
+    public function upload_desain($id)
+    {
+        $rules = [
+            'gambar' => 'is_image[gambar]',
+            'deskripsi' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        $extFile = $this->request->getFile('gambar')->guessExtension();
+        $namafile = 'desain-' . $id . date('-dmY.') . $extFile;
+
+        if (!$this->request->getFile('gambar')->hasMoved()) {
+            $this->request->getFile('gambar')->move('uploads', $namafile);
+        }
+
+        $data = [
+            'id_transaksi' => $id,
+            'gambar' => $namafile,
+            'deskripsi_revisi' => $this->request->getPost('deskripsi'),
+            'jenis_post' => 'Desain',
+        ];
+
+        $this->db->table('transaksi_detail_desain')->insert($data);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
+
     public function laporan_cust()
     {
         //
