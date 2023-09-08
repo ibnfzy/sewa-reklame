@@ -51,6 +51,9 @@ class Reklame extends Migration
             'harga_reklame' => [
                 'type' => 'INT',
             ],
+            'harga_kerja_sama' => [
+                'type' => 'INT'
+            ],
             'lightning' => [
                 'type' => 'CHAR',
                 'constraint' => 2

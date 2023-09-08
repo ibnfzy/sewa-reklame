@@ -7,6 +7,11 @@ $home = new \App\Controllers\Home;
 $star = $home->review_star($data['id_reklame']);
 $total_star = $home->total_review($data['id_reklame']);
 $get = $home->review($data['id_reklame']);
+$harga = $data['harga_reklame'];
+
+if (session()->get('jenis_customer') != null && session()->get('jenis_customer') == 'Kerja Sama') {
+  $harga = $data['harga_kerja_sama'];
+}
 ?>
 
 <div class="main">
@@ -76,7 +81,7 @@ $get = $home->review($data['id_reklame']);
         <div class="col-md-3">
           <div class="box-info-product">
             <p class="price2">Rp.
-              <?= number_format($data['harga_reklame'], 0, ',', '.'); ?>
+              <?= number_format($harga, 0, ',', '.'); ?>
             </p>
             <form action="<?= base_url('Panel/Proses/' . $data['id_reklame']) ?>" method="POST">
               <ul class="prosuct-qty">
@@ -105,18 +110,18 @@ $get = $home->review($data['id_reklame']);
             <?= count($get); ?>)
           </h4>
           <?php foreach ($get as $item): ?>
-          <?php $getcustomer = $db->table('customer')->where('id_customer', $item['id_customer'])->get()->getRowArray(); ?>
-          <li>
-            <a href="javascript::void">
-              <?= $getcustomer['fullname']; ?>
-              <?php for ($i = 0; $i < $item['bintang']; $i++): ?>
-              ⭐
-              <?php endfor ?>
-            </a>
-            <p>
-              <?= $item['isi_review']; ?>
-            </p>
-          </li>
+            <?php $getcustomer = $db->table('customer')->where('id_customer', $item['id_customer'])->get()->getRowArray(); ?>
+            <li>
+              <a href="javascript::void">
+                <?= $getcustomer['fullname']; ?>
+                <?php for ($i = 0; $i < $item['bintang']; $i++): ?>
+                  ⭐
+                <?php endfor ?>
+              </a>
+              <p>
+                <?= $item['isi_review']; ?>
+              </p>
+            </li>
           <?php endforeach ?>
 
         </ul>

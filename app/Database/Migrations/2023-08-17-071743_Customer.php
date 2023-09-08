@@ -31,6 +31,11 @@ class Customer extends Migration
             'nomor_wa' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13
+            ],
+            'jenis_customer' => [
+                'type' => 'VARCHAR',
+                'default' => 'UMUM',
+                'constraint' => 25
             ]
         ]);
 

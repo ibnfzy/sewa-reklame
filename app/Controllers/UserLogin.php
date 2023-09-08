@@ -40,7 +40,8 @@ class UserLogin extends BaseController
                     'id_customer' => $data['id_customer'],
                     'fullname_customer' => $data['fullname'],
                     'username_customer' => $data['username'],
-                    'logged_in_customer' => TRUE
+                    'logged_in_customer' => TRUE,
+                    'jenis_customer' => $data['jenis_customer']
                 ];
 
                 $session->set($sessionData);

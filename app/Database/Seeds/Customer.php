@@ -13,7 +13,8 @@ class Customer extends Seeder
             'fullname' => 'Mimin',
             'password' => password_hash('admin', PASSWORD_DEFAULT),
             'alamat' => 'Jl. Hertasning',
-            'nomor_wa' => '6285158668102'
+            'nomor_wa' => '6285158668102',
+            'jenis_customer' => 'Kerja Sama'
         ]);
     }
 }

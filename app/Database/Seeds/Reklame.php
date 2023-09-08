@@ -20,6 +20,7 @@ class Reklame extends Seeder
                 'status_reklame' => 'Tersedia',
                 'bentuk_reklame' => 'horizon',
                 'harga_reklame' => '200000',
+                'harga_kerja_sama' => '100000',
                 'lightning' => '6',
                 'formasi' => '1',
                 'tgl_insert' => date('Y-m-d')
@@ -35,6 +36,7 @@ class Reklame extends Seeder
                 'status_reklame' => 'Tersedia',
                 'bentuk_reklame' => 'Vertical',
                 'harga_reklame' => '200000',
+                'harga_kerja_sama' => '100000',
                 'lightning' => '4',
                 'formasi' => '2',
                 'tgl_insert' => date('Y-m-d')

@@ -49,12 +49,18 @@ class UserController extends BaseController
     {
         $get = $this->db->table('reklame')->where('id_reklame', $id)->get()->getRowArray();
 
+        $harga = $get['harga_reklame'];
+
+        if (session()->get('jenis_customer') != null && session()->get('jenis_customer') == 'Kerja Sama') {
+            $harga = $get['harga_kerja_sama'];
+        }
+
         $data = [
             'id_reklame' => $id,
             'id_customer' => $_SESSION['id_customer'],
             'fullname' => $_SESSION['fullname_customer'],
             'nama_reklame' => $get['nama_reklame'],
-            'harga' => $get['harga_reklame'],
+            'harga' => $harga,
             'status_transaksi' => 'Penyerahan Desain',
             'total_hari_sewa' => $this->request->getPost('hari')
         ];
