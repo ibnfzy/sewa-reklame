@@ -5,31 +5,26 @@
   <!-- start slider -->
   <div id="fwslider">
     <div class="slider_container">
+      <?php foreach ($data as $item): ?>
       <div class="slide">
         <!-- Slide image -->
-        <img src="<?= base_url('') ?>images/slider1.jpg" class="img-responsive" alt="" />
+        <img src="<?= base_url('uploads/' . $item['gambar']) ?>" class="img-responsive" alt="" />
         <!-- /Slide image -->
         <!-- Texts container -->
         <div class="slide_content">
           <div class="slide_content_wrap">
             <!-- Text title -->
-            <h1 class="title">Run Over<br>Everything</h1>
+            <h1 class="title">
+              <?= $item['text']; ?>
+            </h1>
             <!-- /Text title -->
-            <div class="button"><a href="#">See Details</a></div>
+            <!-- <div class="button"><a href="#">See Details</a></div> -->
           </div>
         </div>
         <!-- /Texts container -->
       </div>
-      <!-- /Duplicate to create more slides -->
-      <div class="slide">
-        <img src="<?= base_url('') ?>images/slider2.jpg" class="img-responsive" alt="" />
-        <div class="slide_content">
-          <div class="slide_content_wrap">
-            <h1 class="title">Run Over<br>Everything</h1>
-            <div class="button"><a href="#">See Details</a></div>
-          </div>
-        </div>
-      </div>
+      <?php endforeach ?>
+
       <!--/slide -->
     </div>
     <div class="timers"></div>
@@ -39,7 +34,7 @@
   <!--/slider -->
 </div>
 
-<div class="content-bottom" style="background: url(<?= base_url('makassar.jpg') ?>); height: 800px;">
+<div class="content-bottom" style="background: black; height: 800px; padding: 5% 0;">
   <div class="container">
     <div class="row content_bottom-text">
       <div class="col-md-7">

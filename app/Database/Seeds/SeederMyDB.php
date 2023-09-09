@@ -12,5 +12,6 @@ class SeederMyDB extends Seeder
         $this->call('Customer');
         $this->call('LokasiReklame');
         $this->call('Reklame');
+        $this->call('Corousel');
     }
 }

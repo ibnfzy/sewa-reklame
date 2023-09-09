@@ -31,6 +31,16 @@
         </li>
 
         <li class="nav-item">
+          <a href="<?= base_url('AdminPanel/Corousel') ?>" class="nav-link">
+            <i class="nav-icon fas fa-image"></i>
+            <p>
+              Corousel Slider Gambar
+              <!-- <span class="right badge badge-danger">New</span> -->
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a href="<?= base_url('AdminPanel/LokasiReklame') ?>" class="nav-link">
             <i class="nav-icon fas fa-tag"></i>
             <p>

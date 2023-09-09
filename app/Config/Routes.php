@@ -60,6 +60,11 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
 
+    $routes->get('Corousel', 'Corousel::index');
+    $routes->post('Corousel', 'Corousel::create');
+    $routes->get('Corousel/new', 'Corousel::new');
+    $routes->get('Corousel/delete/(:num)', 'Corousel::delete/$1');
+
     $routes->get('Reklame', 'Reklame::index');
     $routes->post('Reklame', 'Reklame::create');
     $routes->get('Reklame/(:num)', 'Reklame::edit/$1');
