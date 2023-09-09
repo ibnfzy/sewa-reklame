@@ -119,6 +119,31 @@ class AdmController extends BaseController
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
     }
 
+    public function customer()
+    {
+        return view('admin/cust', [
+            'data' => $this->db->table('customer')->get()->getResultArray()
+        ]);
+    }
+
+    public function custkerja($id)
+    {
+        $this->db->table('customer')->where('id_customer', $id)->update([
+            'jenis_customer' => 'Kerja Sama'
+        ]);
+
+        return redirect()->to(base_url('AdminPanel/Customer'))->with('type-status', 'success')->with('message', 'Data berhasil diubah');
+    }
+
+    public function custumum($id)
+    {
+        $this->db->table('customer')->where('id_customer', $id)->update([
+            'jenis_customer' => 'Umum'
+        ]);
+
+        return redirect()->to(base_url('AdminPanel/Customer'))->with('type-status', 'success')->with('message', 'Data berhasil diubah');
+    }
+
     public function laporan_cust()
     {
         //

@@ -53,6 +53,9 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('ValidasiBBDP/(:num)', 'AdmController::validasibbdp/$1');
     $routes->get('PengerjaanSelesai/(:num)', 'AdmController::pengerjaan_selesai/$1');
     $routes->post('UploadDesain/(:num)', 'AdmController::upload_desain/$1');
+    $routes->get('Customer', 'AdmController::customer');
+    $routes->get('CustKerja/(:num)', 'AdmController::custkerja/$1');
+    $routes->get('CustUmum/(:num)', 'AdmController::custumum/$1');
 
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');

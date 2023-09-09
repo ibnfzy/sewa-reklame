@@ -21,6 +21,16 @@
         </li>
 
         <li class="nav-item">
+          <a href="<?= base_url('AdminPanel/Customer') ?>" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Customer
+              <!-- <span class="right badge badge-danger">New</span> -->
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a href="<?= base_url('AdminPanel/LokasiReklame') ?>" class="nav-link">
             <i class="nav-icon fas fa-tag"></i>
             <p>
