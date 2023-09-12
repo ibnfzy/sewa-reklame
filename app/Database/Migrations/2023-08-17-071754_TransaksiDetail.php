@@ -51,6 +51,15 @@ class TransaksiDetail extends Migration
             'total_hari_sewa' => [
                 'type' => 'INT',
                 'default' => 1
+            ],
+            'tgl_sewa' => [
+                'type' => 'VARCHAR',
+                'constraint' => 60
+            ],
+            'tgl_selesai' => [
+                'type' => 'VARCHAR',
+                'constraint' => 60,
+                'null' => true
             ]
         ]);
 

@@ -86,9 +86,13 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
             <form action="<?= base_url('Panel/Proses/' . $data['id_reklame']) ?>" method="POST">
               <ul class="prosuct-qty">
                 <span>/ Hari:</span>
-                <input type="text" name="hari">
+                <input type="text" name="hari" value="1" class="form-control">
               </ul>
-              <button type="submit" name="Submit" class="exclusive">
+              <ul class="prosuct-qty">
+                <span>Tanggal Sewa:</span>
+                <input type="date" name="tanggal" class="form-control">
+              </ul>
+              <button type="submit" name="Submit" class="btn btn-danger">
                 <span>Sewa</span>
               </button>
             </form>

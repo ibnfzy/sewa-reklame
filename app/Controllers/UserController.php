@@ -40,8 +40,11 @@ class UserController extends BaseController
 
     public function transaksi_detail($id)
     {
+        $data = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
+
         return view('user/transaksi_detail', [
-            'data' => $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray()
+            'data' => $data,
+            'testi' => count($this->db->table('review_reklame')->where('id_reklame', $data['id_reklame'])->get()->getResultArray())
         ]);
     }
 
@@ -62,7 +65,8 @@ class UserController extends BaseController
             'nama_reklame' => $get['nama_reklame'],
             'harga' => $harga,
             'status_transaksi' => 'Penyerahan Desain',
-            'total_hari_sewa' => $this->request->getPost('hari')
+            'total_hari_sewa' => $this->request->getPost('hari'),
+            'tgl_sewa' => date('m/d/Y', strtotime($this->request->getPost('tanggal')))
         ];
 
         $this->db->table('transaksi')->insert($data);
@@ -240,5 +244,31 @@ class UserController extends BaseController
         ]);
 
         return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Desain Berhasil Diterima');
+    }
+
+    public function testimoni_add($id)
+    {
+        $rules = [
+            'bintang' => 'required',
+            'deskripsi' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        $get = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
+
+        $data = [
+            'id_reklame' => $get['id_reklame'],
+            'id_customer' => $get['id_customer'],
+            'isi_testimoni' => $this->request->getPost('deskripsi'),
+            'bintang' => $this->request->getPost('bintang'),
+            'insert_datetime' => date('D M Y - H:i')
+        ];
+
+        $this->db->table('review_reklame')->insert($data);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Review berhasil ditambahkan');
     }
 }

@@ -38,6 +38,8 @@ class Reklame extends BaseController
             'bentuk_reklame' => 'required',
             'harga_reklame' => 'required',
             'deskripsi' => 'required',
+            'lightning' => 'required',
+            'formasi' => 'required'
         ];
 
         if (!$this->validate($rules)) {
@@ -61,6 +63,8 @@ class Reklame extends BaseController
             'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
             'harga_reklame' => $this->request->getPost('harga_reklame'),
             'status_reklame' => 'Tersedia',
+            'lightning' => $this->request->getPost('lightning'),
+            'formasi' => $this->request->getPost('formasi')
         ];
 
         $this->db->table('reklame')->insert($data);
@@ -87,9 +91,11 @@ class Reklame extends BaseController
                 'gambar' => 'is_image[gambar]|max_size[gambar,2048]',
                 'tinggi_reklame' => 'required',
                 'lebar_reklame' => 'required',
-                'deskripsi' => 'required',
                 'bentuk_reklame' => 'required',
                 'harga_reklame' => 'required',
+                'deskripsi' => 'required',
+                'lightning' => 'required',
+                'formasi' => 'required'
             ];
 
             $data = [
@@ -100,9 +106,11 @@ class Reklame extends BaseController
                 'tinggi_reklame' => $this->request->getPost('tinggi_reklame'),
                 'lebar_reklame' => $this->request->getPost('lebar_reklame'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
-                'status_reklame' => 'Tersedia',
                 'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
                 'harga_reklame' => $this->request->getPost('harga_reklame'),
+                'status_reklame' => 'Tersedia',
+                'lightning' => $this->request->getPost('lightning'),
+                'formasi' => $this->request->getPost('formasi')
             ];
         } else {
             $rules = [
@@ -113,6 +121,8 @@ class Reklame extends BaseController
                 'deskripsi' => 'required',
                 'bentuk_reklame' => 'required',
                 'harga_reklame' => 'required',
+                'lightning' => 'required',
+                'formasi' => 'required'
             ];
 
             $data = [
@@ -125,6 +135,8 @@ class Reklame extends BaseController
                 'status_reklame' => 'Tersedia',
                 'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
                 'harga_reklame' => $this->request->getPost('harga_reklame'),
+                'lightning' => $this->request->getPost('lightning'),
+                'formasi' => $this->request->getPost('formasi')
             ];
         }
 

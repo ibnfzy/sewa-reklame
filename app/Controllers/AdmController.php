@@ -44,7 +44,7 @@ class AdmController extends BaseController
     public function validasibbdp($id)
     {
         $this->db->table('transaksi')->where('id_transaksi', $id)->update([
-            'status_transaksi' => 'Pengerjaan Reklame Diproses'
+            'status_transaksi' => 'Proses Review Tanggal Sewa'
         ]);
 
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Bukti Bayar DP');
@@ -142,6 +142,35 @@ class AdmController extends BaseController
         ]);
 
         return redirect()->to(base_url('AdminPanel/Customer'))->with('type-status', 'success')->with('message', 'Data berhasil diubah');
+    }
+
+    public function validasi_tgl($id)
+    {
+        $get = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
+
+        $tgl_selesai = date('m/d/Y', strtotime($get['tgl_sewa'] . ' + ' . $get['total_hari_sewa'] . ' days'));
+
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+            'status_transaksi' => 'Pengerjaan Reklame Diproses',
+            'tgl_selesai' => $tgl_selesai
+        ]);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Tanggal Sewa');
+    }
+
+    public function update_tgl($id)
+    {
+        $get = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
+
+        $tgl_selesai = date('m/d/Y', strtotime($this->request->getPost('tanggal') . ' + ' . $get['total_hari_sewa'] . ' days'));
+
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+            'status_transaksi' => 'Pengerjaan Reklame Diproses',
+            'tgl_sewa' => date('m/d/Y', strtotime($this->request->getPost('tanggal'))),
+            'tgl_selesai' => $tgl_selesai
+        ]);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Tanggal Sewa');
     }
 
     public function laporan_cust()

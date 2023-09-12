@@ -26,6 +26,28 @@
         </select>
       </div>
       <div class="form-group">
+        <label>Lightning</label>
+        <select name="lightning" id="" class="form-control">
+          <option value="1">1 Buah</option>
+          <option value="2">2 Buah</option>
+          <option value="3">3 Buah</option>
+          <option value="4">4 Buah</option>
+          <option value="5">5 Buah</option>
+          <option value="6">6 Buah</option>
+          <option value="7">7 Buah</option>
+          <option value="8">8 Buah</option>
+          <option value="9">9 Buah</option>
+          <option value="10">10 Buah</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Formasi</label>
+        <select name="formasi" id="" class="form-control">
+          <option value="1">1 Arah</option>
+          <option value="2">2 Arah</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="">Harga Sewa/Hari</label>
         <div class="input-group">
           <div class="input-group-prepend">

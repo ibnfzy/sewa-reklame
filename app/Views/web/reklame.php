@@ -13,7 +13,7 @@
     <div class="content-top">
       <h2>Reklame Tidak tersedia</h2>
       <p>Sepertinya reklame pada jalan ini sedang tidak tersedia, silahkan hubungi <a
-          href="https://wa.me/6282194712245">Kami</a> untuk informasi lebih lanjut</p>
+          href="https://wa.me/6282194712245">Kami</a> di whatsapp untuk informasi lebih lanjut</p>
       <div class="close_but"><i class="close1"> </i></div>
     </div>
   <?php endif ?>
@@ -31,12 +31,17 @@
           ?>
           <div class="col-md-3 shop_box"><a href="<?= base_url('Reklame/' . $item['id_reklame']) ?>">
               <img src="<?= base_url('uploads/' . $item['gambar']) ?>" class="img-responsive" alt="" />
-              <span class="new-box">
-                <span class="new-label">Tersedia</span>
-              </span>
+
+              <?php if ($item['status_reklame'] == 'Tersedia'): ?>
+                <span class="new-box">
+                  <span class="new-label">Tersedia</span>
+                </span>
+              <?php endif ?>
+
               <!-- <span class="sale-box">
               <span class="sale-label">Sale!</span>
             </span> -->
+
               <div class="shop_desc">
                 <h3><a href="<?= base_url('Reklame/' . $item['id_reklame']) ?>">
                     <?= $item['nama_reklame']; ?>

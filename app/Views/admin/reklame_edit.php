@@ -30,6 +30,28 @@
         </select>
       </div>
       <div class="form-group">
+        <label>Lightning</label>
+        <select name="lightning" id="" class="form-control">
+          <option <?= ($data['lightning'] == '1') ? 'selected' : '' ?> value="1">1 Buah</option>
+          <option <?= ($data['lightning'] == '2') ? 'selected' : '' ?> value="2">2 Buah</option>
+          <option <?= ($data['lightning'] == '3') ? 'selected' : '' ?> value="3">3 Buah</option>
+          <option <?= ($data['lightning'] == '4') ? 'selected' : '' ?> value="4">4 Buah</option>
+          <option <?= ($data['lightning'] == '5') ? 'selected' : '' ?> value="5">5 Buah</option>
+          <option <?= ($data['lightning'] == '6') ? 'selected' : '' ?> value="6">6 Buah</option>
+          <option <?= ($data['lightning'] == '7') ? 'selected' : '' ?> value="7">7 Buah</option>
+          <option <?= ($data['lightning'] == '8') ? 'selected' : '' ?> value="8">8 Buah</option>
+          <option <?= ($data['lightning'] == '9') ? 'selected' : '' ?> value="9">9 Buah</option>
+          <option <?= ($data['lightning'] == '10') ? 'selected' : '' ?> value="10">10 Buah</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Formasi</label>
+        <select name="formasi" id="" class="form-control">
+          <option <?= ($data['formasi'] == '1') ? 'selected' : '' ?> value="1">1 Arah</option>
+          <option <?= ($data['formasi'] == '2') ? 'selected' : '' ?> value="2">2 Arah</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="">Harga Sewa/Hari</label>
         <div class="input-group">
           <div class="input-group-prepend">

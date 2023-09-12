@@ -91,12 +91,16 @@ class UserLogin extends BaseController
         }
 
         $data = [
-            'nama_jalan' => $this->request->getPost('nama_jalan'),
-            'link_gmap' => $this->request->getPost('link_gmap'),
+            'username' => $this->request->getPost('username'),
+            'fullname' => $this->request->getPost('fullname'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'alamat' => $this->request->getPost('alamat'),
+            'nomor_wa' => $this->request->getPost('nomor_whatsapp'),
+            'jenis_customer' => 'Umum'
         ];
 
-        $this->db->table('lokasi_reklame')->insert($data);
+        $this->db->table('customer')->insert($data);
 
-        return redirect()->to(base_url('Login/User'))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+        return redirect()->to(base_url('Login/User'))->with('type-status', 'success')->with('message', 'Registrasi Berhasil');
     }
 }

@@ -56,6 +56,8 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('Customer', 'AdmController::customer');
     $routes->get('CustKerja/(:num)', 'AdmController::custkerja/$1');
     $routes->get('CustUmum/(:num)', 'AdmController::custumum/$1');
+    $routes->get('ValidasiTgl/(:num)', 'AdmController::validasi_tgl/$1');
+    $routes->post('UpdateTgl/(:num)', 'AdmController::update_tgl/$1');
 
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
