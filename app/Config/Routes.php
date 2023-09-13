@@ -47,6 +47,9 @@ $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
 
 $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'AdmController::index');
+    $routes->post('UpdateInformasi', 'AdmController::updateInformasi');
+    $routes->post('UpdateTentang', 'AdmController::updateTentang');
+
     $routes->get('Transaksi', 'AdmController::transaksi');
     $routes->get('Transaksi/(:num)', 'AdmController::transaksi_detail/$1');
     $routes->get('Validasi/(:num)', 'AdmController::validasi_desain/$1');

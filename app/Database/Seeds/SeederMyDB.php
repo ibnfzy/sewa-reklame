@@ -13,5 +13,6 @@ class SeederMyDB extends Seeder
         $this->call('LokasiReklame');
         $this->call('Reklame');
         $this->call('Corousel');
+        $this->call('InformasiToko');
     }
 }

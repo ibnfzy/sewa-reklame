@@ -782,7 +782,7 @@ ul.footer_box h4{
 	font-size:1.1em;
 	text-transform:uppercase;
 	font-weight:700;
-	margin-bottom: 8%;
+	/* margin-bottom: 8%; */
 }
 ul.footer_box li a{
 	color: #B8B6B6;
@@ -831,7 +831,7 @@ ul.footer_box li a:hover{
 ul.social{
 	list-style:none;
 	padding:0;
-	margin-top: 17%;
+	/* margin-top: 17%; */
 }	
 ul.social li:first-child, ol li:first-child {
 	margin-top: 0px;

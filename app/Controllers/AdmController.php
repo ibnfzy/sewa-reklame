@@ -15,7 +15,29 @@ class AdmController extends BaseController
 
     public function index()
     {
-        return view('admin/home');
+        return view('admin/home', [
+            'data' => $this->db->table('informasi')->where('id_toko_informasi', 1)->get()->getRowArray(),
+            'transaksi' => $this->db->query('SELECT DISTINCT id_reklame, COUNT(DISTINCT id_customer) as total_customer, COUNT(id_transaksi) as total_transaksi, nama_reklame, SUM(harga * total_hari_sewa) as total_harga FROM `transaksi` GROUP BY id_reklame')->getResultArray(),
+            'reklame' => $this->db->table('reklame')->get()->getResultArray()
+        ]);
+    }
+
+    public function updateInformasi()
+    {
+        $this->db->table('informasi')->where('id_toko_informasi', 1)->update([
+            'nomor_wa' => '62' . $this->request->getPost('nomor_wa')
+        ]);
+
+        return redirect()->to(base_url('AdminPanel'))->with('type-status', 'success')->with('message', 'Berhasil Update Informasi');
+    }
+
+    public function updateTentang()
+    {
+        $this->db->table('informasi')->where('id_toko_informasi', 1)->update([
+            'tentang' => $this->request->getPost('tentang')
+        ]);
+
+        return redirect()->to(base_url('AdminPanel'))->with('type-status', 'success')->with('message', 'Berhasil Update Informasi');
     }
 
     public function transaksi()
@@ -175,11 +197,15 @@ class AdmController extends BaseController
 
     public function laporan_cust()
     {
-        //
+        return view('admin/laporan_cust', [
+            'data' => $this->db->table('customer')->get()->getResultArray()
+        ]);
     }
 
     public function laporan_transaksi()
     {
-        //
+        return view('admin/laporan_transaksi', [
+            'data' => $this->db->query('SELECT DISTINCT id_reklame, COUNT(DISTINCT id_customer) as total_customer, COUNT(id_transaksi) as total_transaksi, nama_reklame, SUM(harga * total_hari_sewa) as total_harga FROM `transaksi` GROUP BY id_reklame')->getResultArray()
+        ]);
     }
 }
