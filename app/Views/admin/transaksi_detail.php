@@ -6,6 +6,8 @@ $db = \Config\Database::connect();
 $get = $db->table('transaksi_detail_desain')->where('id_transaksi', $data['id_transaksi'])->orderBy('id_transaksi_detail_desain', 'DESC')->get()->getResultArray();
 $total = $data['harga'] * $data['total_hari_sewa'];
 $isUpRefThere = false;
+
+$cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get()->getRowArray();
 ?>
 
 <style>
@@ -161,7 +163,7 @@ $isUpRefThere = false;
         </ul>
         <div class="mt-5 mb-3">
 
-          <a href="#" class="btn btn-sm btn-success">Hubungi Pelanggan</a>
+          <a href="https://wa.me/<?= $cust['nomor_wa'] ?>" class="btn btn-sm btn-success">Hubungi Pelanggan</a>
 
           <?php if ($data['status_transaksi'] == 'Menunggu Desain divalidasi'): ?>
           <a href="<?= base_url('AdminPanel/Validasi/' . $data['id_transaksi']); ?>"

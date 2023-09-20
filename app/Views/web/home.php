@@ -6,23 +6,23 @@
   <div id="fwslider">
     <div class="slider_container">
       <?php foreach ($data as $item): ?>
-      <div class="slide">
-        <!-- Slide image -->
-        <img src="<?= base_url('uploads/' . $item['gambar']) ?>" class="img-responsive" alt="" />
-        <!-- /Slide image -->
-        <!-- Texts container -->
-        <div class="slide_content">
-          <div class="slide_content_wrap">
-            <!-- Text title -->
-            <h1 class="title">
-              <?= $item['text']; ?>
-            </h1>
-            <!-- /Text title -->
-            <!-- <div class="button"><a href="#">See Details</a></div> -->
+        <div class="slide">
+          <!-- Slide image -->
+          <img src="<?= base_url('uploads/' . $item['gambar']) ?>" class="img-responsive" alt="" />
+          <!-- /Slide image -->
+          <!-- Texts container -->
+          <div class="slide_content">
+            <div class="slide_content_wrap">
+              <!-- Text title -->
+              <h1 class="title">
+                <?= $item['text']; ?>
+              </h1>
+              <!-- /Text title -->
+              <!-- <div class="button"><a href="#">See Details</a></div> -->
+            </div>
           </div>
+          <!-- /Texts container -->
         </div>
-        <!-- /Texts container -->
-      </div>
       <?php endforeach ?>
 
       <!--/slide -->
@@ -39,11 +39,9 @@
     <div class="row content_bottom-text">
       <div class="col-md-7">
         <h3>Selamat Datang<br>di Website CV Duta Mandiri Advertising</h3>
-        <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-          tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-          tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-          dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
-          at vero eros et accumsan et iusto odio.</p>
+        <p class="m_1">
+          <?= $informasi['tentang']; ?>
+        </p>
       </div>
     </div>
   </div>

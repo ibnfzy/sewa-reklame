@@ -13,7 +13,9 @@
         <select class="form-control" name="id_lokasi" id="">
           <?php $i = 1; ?>
           <?php foreach ($lokasi as $item): ?>
-          <option value="<?= $item['id_lokasi'] ?>"><?= $i . '. ' . $item['nama_jalan'] ?></option>
+          <option value="<?= $item['id_lokasi'] ?>">
+            <?= $i . '. ' . $item['nama_jalan'] ?>
+          </option>
           <?php $i++ ?>
           <?php endforeach ?>
         </select>
@@ -54,6 +56,15 @@
             <span class="input-group-text">Rp.</span>
           </div>
           <input type="text" class="form-control" name="harga_reklame">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Harga Sewa/Hari Kerja Sama</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Rp.</span>
+          </div>
+          <input type="text" class="form-control" name="harga_kerja_sama">
         </div>
       </div>
       <div class="form-group">

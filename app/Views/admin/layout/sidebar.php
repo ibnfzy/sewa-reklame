@@ -71,7 +71,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link">
+          <a href="<?= base_url('AdminPanel/laporan_cust') ?>" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Laporan Customer
@@ -81,7 +81,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= base_url('AdminPanel/') ?>" class="nav-link">
+          <a href="<?= base_url('AdminPanel/laporan_transaksi') ?>" class="nav-link">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
               Laporan Transaksi

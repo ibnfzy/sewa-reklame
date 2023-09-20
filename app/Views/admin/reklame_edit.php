@@ -14,11 +14,11 @@
         <select class="form-control" name="id_lokasi" id="">
           <?php $i = 1; ?>
           <?php foreach ($lokasi as $item): ?>
-          <option <?= $selected = ($item['id_lokasi'] == $data['id_lokasi']) ? 'selected' : ''; ?>
-            value="<?= $item['id_lokasi'] ?>">
-            <?= $i . '. ' . $item['nama_jalan'] ?>
-          </option>
-          <?php $i++ ?>
+            <option <?= $selected = ($item['id_lokasi'] == $data['id_lokasi']) ? 'selected' : ''; ?>
+              value="<?= $item['id_lokasi'] ?>">
+              <?= $i . '. ' . $item['nama_jalan'] ?>
+            </option>
+            <?php $i++ ?>
           <?php endforeach ?>
         </select>
       </div>
@@ -58,6 +58,15 @@
             <span class="input-group-text">Rp.</span>
           </div>
           <input type="text" class="form-control" name="harga_reklame" value="<?= $data['harga_reklame'] ?>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Harga Sewa/Hari Kerja Sama</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Rp.</span>
+          </div>
+          <input type="text" class="form-control" name="harga_kerja_sama" value="<?= $data['harga_kerja_sama'] ?>">
         </div>
       </div>
       <div class="form-group">

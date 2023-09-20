@@ -86,6 +86,9 @@
   <!-- AdminLTE App -->
   <script src="<?= base_url() ?>dist/js/adminlte.min.js"></script>
 
+  <script src="<?= base_url(''); ?>/jspdf/examples/libs/jspdf.umd.js"></script>
+  <script src="<?= base_url(''); ?>/jspdf/dist/jspdf.plugin.autotable.js"></script>
+
   <script>
     $(function () {
       $("#db_button").DataTable({

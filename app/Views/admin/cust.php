@@ -34,7 +34,8 @@
             <?= $item['fullname']; ?>
           </td>
           <td>
-            <a href="wa.me/<?= $item['nomor_wa'] ?>" target="_blank" class="btn btn-success">Hubungi Customer</a>
+            <a href="https://wa.me/<?= $item['nomor_wa'] ?>" target="_blank" class="btn btn-success">Hubungi
+              Customer</a>
           </td>
           <td><?= count($getTransaksi) ?></td>
           <td>

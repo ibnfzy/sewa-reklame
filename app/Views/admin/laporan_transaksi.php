@@ -5,7 +5,7 @@
 <div class="card">
   <div class="card-header">
     <button id="print" class="btn btn-default">Print</button>
-    <button class="btn btn-danger">Download PDF</button>
+    <button onclick="javascript:demoFromHTML();" class="btn btn-danger">Download PDF</button>
   </div>
   <div class="card-body">
     <table id="printTable" class="table table-bordered table-hover">
@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <?php $i = 1; ?>
-        <?php foreach ($transaksi as $item): ?>
+        <?php foreach ($data as $item): ?>
           <tr>
             <td>
               <?= $i++; ?>
@@ -69,17 +69,17 @@
     var doc = new jspdf.jsPDF()
 
     doc.setFontSize(18)
-    doc.text('Laporan Pelanggan', 110, 10, 'center')
+    doc.text('Laporan Transaksi', 110, 10, 'center')
     doc.autoTable({
       html: '#printTable'
     })
 
     var finalY = doc.lastAutoTable.finalY
     doc.setFontSize(12)
-    doc.text('Jeneponto, ' + fulldate, 140, finalY + 2)
+    doc.text('Makassar, ' + fulldate, 140, finalY + 2)
     doc.text('Admin', 140, finalY + 15)
 
-    doc.save('laporan_pelanggan.pdf')
+    doc.save('laporan_transaksi.pdf')
   }
 </script>
 <?= $this->endSection(); ?>

@@ -14,7 +14,8 @@ class Home extends BaseController
     public function index(): string
     {
         return view('web/home', [
-            'data' => $this->db->table('corousel')->get()->getResultArray()
+            'data' => $this->db->table('corousel')->get()->getResultArray(),
+            'informasi' => $this->db->table('informasi')->where('id_toko_informasi', '1')->get()->getRowArray()
         ]);
     }
 

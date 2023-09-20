@@ -43,10 +43,9 @@
           </td>
           <td>
             <div class="btn-group">
-              <a class="btn btn-primary"
-                href="<?= base_url('AdminPanel/LokasiReklame/' . $item['id_reklame']); ?>">Edit</a>
+              <a class="btn btn-primary" href="<?= base_url('AdminPanel/Reklame/' . $item['id_reklame']); ?>">Edit</a>
               <a class="btn btn-danger"
-                href="<?= base_url('AdminPanel/LokasiReklame/delete/' . $item['id_reklame']); ?>">Delete</a>
+                href="<?= base_url('AdminPanel/Reklame/delete/' . $item['id_reklame']); ?>">Delete</a>
             </div>
           </td>
         </tr>
