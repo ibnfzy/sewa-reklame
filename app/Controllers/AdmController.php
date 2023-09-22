@@ -17,7 +17,7 @@ class AdmController extends BaseController
     {
         return view('admin/home', [
             'data' => $this->db->table('informasi')->where('id_toko_informasi', 1)->get()->getRowArray(),
-            'transaksi' => $this->db->query('SELECT DISTINCT id_reklame, COUNT(DISTINCT id_customer) as total_customer, COUNT(id_transaksi) as total_transaksi, nama_reklame, SUM(harga * total_hari_sewa) as total_harga FROM `transaksi` GROUP BY id_reklame')->getResultArray(),
+            'transaksi' => $this->db->query('SELECT DISTINCT id_reklame, COUNT(DISTINCT id_customer) as total_customer, COUNT(id_transaksi) as total_transaksi, nama_reklame, SUM(harga * total_hari_sewa) as total_harga FROM `transaksi` GROUP BY id_reklame LIMIT 5')->getResultArray(),
             'reklame' => $this->db->table('reklame')->get()->getResultArray()
         ]);
     }

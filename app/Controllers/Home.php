@@ -96,4 +96,24 @@ class Home extends BaseController
     {
         return $this->db->table('review_reklame')->where('id_reklame', $id)->get()->getResultArray();
     }
+
+    public function proses_redirect($id)
+    {
+        $date1 = new \DateTime(date('Y-m-d', strtotime($this->request->getPost('tanggal'))));
+        $date2 = new \DateTime(date('Y-m-d'));
+
+        $diff = $date1->diff($date2);
+        $inday = (int) $diff->format("%r%a");
+
+
+        if ($inday >= 1) {
+            return redirect()->to(base_url('Reklame/' . $id))->with('type-status', 'error')->with('message', 'Tanggal sewa tidak benar');
+        }
+
+        session()->set('id_reklame_sewa', $id);
+        session()->set('tanggal', $this->request->getPost('tanggal'));
+        session()->set('hari', $this->request->getPost('hari'));
+
+        return redirect()->to(base_url('Panel/Proses/' . $id));
+    }
 }

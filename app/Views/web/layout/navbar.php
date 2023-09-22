@@ -9,20 +9,32 @@
           <div class="menu">
             <a class="toggleMenu" href="#"><img src="<?= base_url('') ?>images/nav.png" alt="" /></a>
             <ul class="nav" id="nav">
-              <li><a href="<?= base_url('') ?>">HOME</a></li>
+              <!-- <li><a href="<?= base_url('') ?>">HOME</a></li> -->
               <li><a href="<?= base_url('Lokasi') ?>">Katalog Lokasi Reklame</a></li>
-              <li><a href="<?= base_url('Panel') ?>">Pelanggan Panel</a></li>
+
               <div class="clear"></div>
             </ul>
-            <script type="text/javascript" src="<?= base_url('') ?>js/responsive-nav.js"></script>
+
           </div>
           <div class="clear"></div>
         </div>
         <div class="header_right">
           <!-- start search-->
-          <div class="clear"></div>
+          <div class="menu">
+            <a class="toggleMenu" href="#"><img src="<?= base_url('') ?>images/nav.png" alt="" /></a>
+            <ul class="nav" id="nav">
+              <!-- <li><a href="<?= base_url('') ?>">HOME</a></li> -->
+              <li><a href="<?= base_url('Panel') ?>">Login</a></li>
+
+
+              <div class="clear"></div>
+            </ul>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="<?= base_url('') ?>js/responsive-nav.js"></script>

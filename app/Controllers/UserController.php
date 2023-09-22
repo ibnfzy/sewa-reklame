@@ -65,8 +65,8 @@ class UserController extends BaseController
             'nama_reklame' => $get['nama_reklame'],
             'harga' => $harga,
             'status_transaksi' => 'Penyerahan Desain',
-            'total_hari_sewa' => $this->request->getPost('hari'),
-            'tgl_sewa' => date('m/d/Y', strtotime($this->request->getPost('tanggal')))
+            'total_hari_sewa' => session()->get('hari'),
+            'tgl_sewa' => date('m/d/Y', strtotime(session()->get('tanggal')))
         ];
 
         $this->db->table('transaksi')->insert($data);
@@ -132,6 +132,7 @@ class UserController extends BaseController
     {
         $rules = [
             'gambar' => 'is_image[gambar]',
+            'jenis_pembayaran' => 'required'
         ];
 
         if (!$this->validate($rules)) {
@@ -145,10 +146,12 @@ class UserController extends BaseController
             $this->request->getFile('gambar')->move('uploads', $namafile);
         }
 
+        $deskripsi = ($this->request->getPost('jenis_pembayaran') == '1') ? 'Bukti Bayar DP Lunas' : 'Bukti Bayar DP';
+
         $data = [
             'id_transaksi' => $id,
             'gambar' => $namafile,
-            'deskripsi_revisi' => 'Bukti Bayar DP',
+            'deskripsi_revisi' => $deskripsi,
             'jenis_post' => 'Upload Bukti Bayar'
         ];
 

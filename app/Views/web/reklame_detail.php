@@ -83,7 +83,7 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
             <p class="price2">Rp.
               <?= number_format($harga, 0, ',', '.'); ?>
             </p>
-            <form action="<?= base_url('Panel/Proses/' . $data['id_reklame']) ?>" method="POST">
+            <form action="<?= base_url('Proses/' . $data['id_reklame']) ?>" method="POST">
               <ul class="prosuct-qty">
                 <span>/ Hari:</span>
                 <input type="text" name="hari" value="1" class="form-control">
