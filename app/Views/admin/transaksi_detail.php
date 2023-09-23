@@ -176,6 +176,12 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
             Bukti Bayar DP</a>
           <?php endif ?>
 
+          <?php if ($data['status_transaksi'] == 'Menunggu Validasi Bukti Bayar Lunas'): ?>
+          <a href="<?= base_url('AdminPanel/ValidasiLunas/' . $data['id_transaksi']); ?>"
+            class="btn btn-sm btn-warning">Validasi
+            Bukti Bayar Lunas</a>
+          <?php endif ?>
+
           <?php if ($data['status_transaksi'] == 'Pengerjaan Reklame Diproses'): ?>
           <a href="<?= base_url('AdminPanel/PengerjaanSelesai/' . $data['id_transaksi']) ?>"
             class="btn btn-sm btn-warning mb-2">Pengerjaan

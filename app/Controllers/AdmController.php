@@ -18,7 +18,7 @@ class AdmController extends BaseController
         return view('admin/home', [
             'data' => $this->db->table('informasi')->where('id_toko_informasi', 1)->get()->getRowArray(),
             'transaksi' => $this->db->query('SELECT DISTINCT id_reklame, COUNT(DISTINCT id_customer) as total_customer, COUNT(id_transaksi) as total_transaksi, nama_reklame, SUM(harga * total_hari_sewa) as total_harga FROM `transaksi` GROUP BY id_reklame LIMIT 5')->getResultArray(),
-            'reklame' => $this->db->table('reklame')->get()->getResultArray()
+            'reklame' => $this->db->table('reklame')->get(5)->getResultArray()
         ]);
     }
 
@@ -68,6 +68,37 @@ class AdmController extends BaseController
         $this->db->table('transaksi')->where('id_transaksi', $id)->update([
             'status_transaksi' => 'Proses Review Tanggal Sewa'
         ]);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Bukti Bayar DP');
+    }
+
+    public function validasilunas($id)
+    {
+        $lunas = false;
+        $bayarDP = false;
+        $get = $this->db->table('transaksi_detail_desain')->where('id_transaksi', $id)->get()->getResultArray();
+
+        foreach ($get as $mo) {
+            if (in_array('Bukti Bayar DP', $mo)) {
+                $bayarDP = true;
+            }
+
+            if (in_array('Bukti Bayar Lunas', $mo)) {
+                $lunas = true;
+            }
+        }
+
+        if ($bayarDP == true && $lunas && true) {
+            $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+                'status_transaksi' => 'Transaksi Selesai'
+            ]);
+        }
+
+        if ($bayarDP = false && $lunas && true) {
+            $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+                'status_transaksi' => 'Proses Review Tanggal Sewa'
+            ]);
+        }
 
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Bukti Bayar DP');
     }

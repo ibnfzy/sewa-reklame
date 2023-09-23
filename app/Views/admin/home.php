@@ -54,7 +54,9 @@
 
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Grafik Table Reklame Berhasil Tahun <?= date('Y') ;?></h3>
+          <h3 class="card-title">Grafik Table Reklame Berhasil Tahun
+            <?= date('Y'); ?>
+          </h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -202,7 +204,7 @@ $(function() {
   var areaChartData = {
     labels: <?= json_encode($label); ?>,
     datasets: [
-      <?php foreach ($reklame as $item): ?> {
+      <?php foreach ($transaksi as $item): ?> {
         <?php $id = $item['id_reklame']; ?>
         label: '<?= $item['nama_reklame']; ?>',
           backgroundColor: getRandomColor(),

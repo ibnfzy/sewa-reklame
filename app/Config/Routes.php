@@ -33,7 +33,7 @@ $routes->get('/', 'Home::index');
 $routes->get('Lokasi', 'Home::katalog_lokasi');
 $routes->get('Lokasi/(:num)', 'Home::katalog_reklame/$1');
 $routes->get('Reklame/(:num)', 'Home::reklame/$1');
-$routes->get('Proses/(:num)', 'Home::proses_redirect/$1');
+$routes->post('Proses/(:num)', 'Home::proses_redirect/$1');
 
 $routes->group('Login', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('Admin', 'AdminLogin::index');
@@ -55,6 +55,7 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('Transaksi/(:num)', 'AdmController::transaksi_detail/$1');
     $routes->get('Validasi/(:num)', 'AdmController::validasi_desain/$1');
     $routes->get('ValidasiBBDP/(:num)', 'AdmController::validasibbdp/$1');
+    $routes->get('ValidasiLunas/(:num)', 'AdmController::validasilunas/$1');
     $routes->get('PengerjaanSelesai/(:num)', 'AdmController::pengerjaan_selesai/$1');
     $routes->post('UploadDesain/(:num)', 'AdmController::upload_desain/$1');
     $routes->get('Customer', 'AdmController::customer');
@@ -89,6 +90,7 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
 $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'UserController::index');
     $routes->get('Transaksi', 'UserController::transaksi_bs');
+    $routes->get('TransaksiO', 'UserController::transaksi');
     $routes->get('Transaksi_', 'UserController::transaksi_selesai');
     $routes->get('Transaksi/(:num)', 'UserController::transaksi_detail/$1');
     $routes->get('Proses/(:num)', 'UserController::proses_transaksi/$1');
@@ -96,9 +98,15 @@ $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->post('JenisDesain/(:num)', 'UserController::jenis_penyerahan/$1');
     $routes->post('UploadSendiri/(:num)', 'UserController::upload_desain_sendiri/$1');
     $routes->post('UploadBBDP/(:num)', 'UserController::uploadBBDP/$1');
+    $routes->post('UploadLunas/(:num)', 'UserController::uploadLunas/$1');
     $routes->post('UploadKriteria/(:num)', 'UserController::uploadKriteriaDesain/$1');
     $routes->get('TerimaDesain/(:num)', 'UserController::terima_desain/$1');
     $routes->post('UploadRevisi/(:num)', 'UserController::upload_revisi/$1');
+    $routes->post('Testimoni/(:num)', 'UserController::testimoni_add/$1');
+    $routes->get('Testimoni/(:num)', 'UserController::testimoni_delete/$1');
+    $routes->get('Testimoni', 'UserController::testimoni');
+    $routes->post('Informasi', 'UserController::informasi_update');
+    $routes->post('Password', 'UserController::password_update');
 });
 
 /*
