@@ -58,11 +58,13 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
     $routes->get('ValidasiLunas/(:num)', 'AdmController::validasilunas/$1');
     $routes->get('PengerjaanSelesai/(:num)', 'AdmController::pengerjaan_selesai/$1');
     $routes->post('UploadDesain/(:num)', 'AdmController::upload_desain/$1');
+    $routes->post('UploadDok/(:num)', 'AdmController::upload_dokumentasi/$1');
     $routes->get('Customer', 'AdmController::customer');
     $routes->get('CustKerja/(:num)', 'AdmController::custkerja/$1');
     $routes->get('CustUmum/(:num)', 'AdmController::custumum/$1');
     $routes->get('ValidasiTgl/(:num)', 'AdmController::validasi_tgl/$1');
     $routes->post('UpdateTgl/(:num)', 'AdmController::update_tgl/$1');
+    $routes->get('LanjutTransaksi/(:num)', 'AdmController::lanjut_transaksi/$1');
 
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');

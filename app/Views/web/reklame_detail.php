@@ -86,13 +86,15 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
             <form action="<?= base_url('Proses/' . $data['id_reklame']) ?>" method="POST">
               <ul class="prosuct-qty">
                 <span>/ Hari:</span>
-                <input type="text" name="hari" value="1" class="form-control">
+                <input onchange="hari_change()" type="text" name="hari" id="hari" value="7" class="form-control">
               </ul>
               <ul class="prosuct-qty">
                 <span>Tanggal Sewa:</span>
-                <input type="date" name="tanggal" class="form-control">
+                <input onchange="tgl_change('<?= $data['status_reklame']; ?>')" type="date" name="tanggal"
+                  class="form-control">
               </ul>
-              <button type="submit" name="Submit" class="btn btn-danger">
+              <button <?= ($data['status_reklame'] == 'Tidak Tersedia') ? 'disabled' : ''; ?> type="submit" name="Submit"
+                class="btn btn-danger">
                 <span>Sewa</span>
               </button>
             </form>
@@ -123,7 +125,7 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
                 <?php endfor ?>
               </a>
               <p>
-                <?= $item['isi_review']; ?>
+                <?= $item['isi_testimoni']; ?>
               </p>
             </li>
           <?php endforeach ?>
@@ -134,4 +136,23 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
   </div>
 </div>
 
+<?= $this->endSection(); ?>
+
+<?= $this->section('script'); ?>
+<script>
+  function tgl_change(status) {
+    if (status === 'Tidak Tersedia') {
+      return toastr['error']('silahkan Hubungi admin atau mencari hari yang lain');
+    }
+  }
+
+  function hari_change() {
+    hari = $('#hari').val();
+
+    if (hari < 7) {
+      $('#hari').val(7)
+      return toastr['error']('Hari sewa minimal 7 Hari');
+    }
+  }
+</script>
 <?= $this->endSection(); ?>

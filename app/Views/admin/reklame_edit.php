@@ -10,15 +10,25 @@
     enctype="multipart/form-data">
     <div class="card-body">
       <div class="form-group">
+        <label for="StatusReklame">Status Reklame</label>
+        <select name="status_reklame" id="StatusReklame" class="">
+          <option <?= ($data['status_reklame'] == 'Tersedia') ? 'Selected' : ''; ?> value="Tersedia">1. Tersedia
+          </option>
+          <option <?= ($data['status_reklame'] == 'Tidak Tersedia') ? 'Selected' : ''; ?> value="Tidak Tersedia">2.
+            Tidak
+            Tersedia</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label>Jalan</label>
         <select class="form-control" name="id_lokasi" id="">
           <?php $i = 1; ?>
           <?php foreach ($lokasi as $item): ?>
-            <option <?= $selected = ($item['id_lokasi'] == $data['id_lokasi']) ? 'selected' : ''; ?>
-              value="<?= $item['id_lokasi'] ?>">
-              <?= $i . '. ' . $item['nama_jalan'] ?>
-            </option>
-            <?php $i++ ?>
+          <option <?= $selected = ($item['id_lokasi'] == $data['id_lokasi']) ? 'selected' : ''; ?>
+            value="<?= $item['id_lokasi'] ?>">
+            <?= $i . '. ' . $item['nama_jalan'] ?>
+          </option>
+          <?php $i++ ?>
           <?php endforeach ?>
         </select>
       </div>

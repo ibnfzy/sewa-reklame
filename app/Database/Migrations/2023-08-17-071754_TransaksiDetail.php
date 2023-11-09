@@ -60,6 +60,10 @@ class TransaksiDetail extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 60,
                 'null' => true
+            ],
+            'tgl_jatuh_tempo' => [
+                'type' => 'DATE',
+                'null' => true
             ]
         ]);
 

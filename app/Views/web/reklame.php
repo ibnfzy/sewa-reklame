@@ -38,6 +38,12 @@
                 </span>
               <?php endif ?>
 
+              <?php if ($item['status_reklame'] == 'Tidak Tersedia'): ?>
+                <span class="sale-box">
+                  <span class="sale-label">Tidak Tersedia</span>
+                </span>
+              <?php endif ?>
+
               <!-- <span class="sale-box">
               <span class="sale-label">Sale!</span>
             </span> -->

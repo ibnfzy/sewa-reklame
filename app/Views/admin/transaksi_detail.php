@@ -187,7 +187,9 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
             class="btn btn-sm btn-warning mb-2">Pengerjaan
             Selesai</a>
 
-          <a href="#" class="btn btn-sm btn-primary">Upload Dokumentasi Pemasangan Reklame</a>
+          <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#UploadDokumentasi">Upload
+            Dokumentasi
+            Pemasangan Reklame</a>
 
           <?php endif ?>
 
@@ -204,6 +206,12 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
             onclick="confirm('Validasi Tanggal ?')" class="btn btn-sm btn-warning mt-1">Validasi
             Tanggal
             Sewa Pelanggan</a>
+          <?php endif ?>
+
+          <?php if ($data['status_transaksi'] == 'Gagal') : ?>
+          <a href="<?= base_url('AdminPanel/LanjutTransaksi/' . $data['id_transaksi']); ?>"
+            class="btn btn-sm btn-danger"
+            onclick="confirm('Yakin ingin menyelesaikan transaksi dengan status gagal ini ?')">Selesaikan Transaksi</a>
           <?php endif ?>
 
         </div>
@@ -273,7 +281,8 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
 <?php endif ?>
 
 <?php if ($data['status_transaksi'] == 'Pengerjaan Reklame Diproses'): ?>
-<div class="modal fade" id="uploadBB" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
+<div class="modal fade" id="UploadDokumentasi" tabindex="-1" role="dialog" aria-labelledby="uploadLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

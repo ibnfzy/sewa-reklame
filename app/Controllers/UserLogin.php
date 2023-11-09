@@ -50,7 +50,7 @@ class UserLogin extends BaseController
                 // $session->markAsTempdata('logged_in_admin', 1800); //timeout 30 menit
 
                 if (session()->get('id_reklame_sewa') != null) {
-                    return redirect()->to(base_url('Panel/ProsesGet/' . session()->get('id_reklame_sewa')));
+                    return redirect()->to(base_url('Panel/Proses/' . session()->get('id_reklame_sewa')));
                 }
 
                 return redirect()->to(base_url('Panel'))->with('type-status', 'info')

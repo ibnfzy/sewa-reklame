@@ -77,6 +77,7 @@ class AdmController extends BaseController
         $lunas = false;
         $bayarDP = false;
         $get = $this->db->table('transaksi_detail_desain')->where('id_transaksi', $id)->get()->getResultArray();
+        $getTransaksi = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
 
         foreach ($get as $mo) {
             if (in_array('Bukti Bayar DP', $mo)) {
@@ -88,17 +89,19 @@ class AdmController extends BaseController
             }
         }
 
-        if ($bayarDP == true && $lunas && true) {
+        if ($bayarDP == true && $lunas == true) {
             $this->db->table('transaksi')->where('id_transaksi', $id)->update([
                 'status_transaksi' => 'Transaksi Selesai'
             ]);
         }
 
-        if ($bayarDP = false && $lunas && true) {
+        if ($bayarDP == false && $lunas == true) {
             $this->db->table('transaksi')->where('id_transaksi', $id)->update([
                 'status_transaksi' => 'Proses Review Tanggal Sewa'
             ]);
         }
+
+        $this->db->table('reklame')->where('id_reklame', $getTransaksi['id_reklame'])->update(['status_reklame' => 'Tidak Tersedia']);
 
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Bukti Bayar DP');
     }
@@ -135,8 +138,23 @@ class AdmController extends BaseController
 
     public function pengerjaan_selesai($id)
     {
+        $get = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
+
+        $format = $get['total_hari_sewa'] - (($get['total_hari_sewa'] * 10) / 100);
+
+        $format = 0.9;
+
+        $format = (gettype($format) == 'double') ? round($format) : $format;
+
+        $format = ($format < 1) ? 1 : $format;
+
+        $formatDay = "+$format Days";
+
+        $getJatuhTempo = date('Y-m-d', strtotime($formatDay));
+
         $this->db->table('transaksi')->where('id_transaksi', $id)->update([
-            'status_transaksi' => 'Pengerjaan Selesai'
+            'status_transaksi' => 'Pengerjaan Selesai',
+            'tgl_jatuh_tempo' => $getJatuhTempo
         ]);
 
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Pengerjaan Selesai');
@@ -236,7 +254,16 @@ class AdmController extends BaseController
     public function laporan_transaksi()
     {
         return view('admin/laporan_transaksi', [
-            'data' => $this->db->query('SELECT DISTINCT id_reklame, COUNT(DISTINCT id_customer) as total_customer, COUNT(id_transaksi) as total_transaksi, nama_reklame, SUM(harga * total_hari_sewa) as total_harga FROM `transaksi` GROUP BY id_reklame')->getResultArray()
+            'data' => $this->db->query('SELECT * FROM `transaksi`')->getResultArray()
         ]);
+    }
+
+    public function lanjut_transaksi($id)
+    {
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+            'status_transaksi' => 'Transaksi Selesai'
+        ]);
+
+        return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Menyelesaikan Transaksi');
     }
 }

@@ -98,7 +98,8 @@ class Reklame extends BaseController
                 'deskripsi' => 'required',
                 'lightning' => 'required',
                 'formasi' => 'required',
-                'harga_kerja_sama' => 'required'
+                'harga_kerja_sama' => 'required',
+                'status_reklame' => 'required'
             ];
 
             $data = [
@@ -111,10 +112,10 @@ class Reklame extends BaseController
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
                 'harga_reklame' => $this->request->getPost('harga_reklame'),
-                'status_reklame' => 'Tersedia',
+                'status_reklame' => $this->request->getPost('status_reklame'),
                 'lightning' => $this->request->getPost('lightning'),
                 'formasi' => $this->request->getPost('formasi'),
-                'harga_kerja_sama' => $this->request->getPost('harga_kerja_sama')
+                'harga_kerja_sama' => $this->request->getPost('harga_kerja_sama'),
             ];
         } else {
             $rules = [
@@ -127,7 +128,8 @@ class Reklame extends BaseController
                 'harga_reklame' => 'required',
                 'lightning' => 'required',
                 'formasi' => 'required',
-                'harga_kerja_sama' => 'required'
+                'harga_kerja_sama' => 'required',
+                'status_reklame' => 'required'
             ];
 
             $data = [
@@ -137,7 +139,7 @@ class Reklame extends BaseController
                 'tinggi_reklame' => $this->request->getPost('tinggi_reklame'),
                 'lebar_reklame' => $this->request->getPost('lebar_reklame'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
-                'status_reklame' => 'Tersedia',
+                'status_reklame' => $this->request->getPost('status_reklame'),
                 'bentuk_reklame' => $this->request->getPost('bentuk_reklame'),
                 'harga_reklame' => $this->request->getPost('harga_reklame'),
                 'lightning' => $this->request->getPost('lightning'),

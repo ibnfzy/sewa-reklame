@@ -29,7 +29,7 @@ class Home extends BaseController
     public function katalog_reklame($idl)
     {
         return view('web/reklame', [
-            'data' => $this->db->table('reklame')->where('id_lokasi', $idl)->where('status_reklame', 'Tersedia')->get()->getResultArray()
+            'data' => $this->db->table('reklame')->where('id_lokasi', $idl)->get()->getResultArray()
         ]);
     }
 
@@ -99,6 +99,10 @@ class Home extends BaseController
 
     public function proses_redirect($id)
     {
+        if ($this->request->getPost('hari') < 7) {
+            return redirect()->to(base_url('Reklame/' . $id))->with('type-status', 'error')->with('message', 'Hari sewa minimal 7 Hari');
+        }
+
         $date1 = new \DateTime(date('Y-m-d', strtotime($this->request->getPost('tanggal'))));
         $date2 = new \DateTime(date('Y-m-d'));
 
