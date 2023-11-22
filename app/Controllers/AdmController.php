@@ -91,7 +91,8 @@ class AdmController extends BaseController
 
         if ($bayarDP == true && $lunas == true) {
             $this->db->table('transaksi')->where('id_transaksi', $id)->update([
-                'status_transaksi' => 'Transaksi Selesai'
+                'status_transaksi' => 'Transaksi Selesai',
+                'tgl_jatuh_tempo' => null
             ]);
         }
 

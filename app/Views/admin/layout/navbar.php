@@ -22,7 +22,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" role="button">
+      <a class="nav-link" href="<?= base_url('Login/Admin/Destroy') ;?>" role="button">
         <i class="fas fa-arrow-left"></i> &nbsp; Log Out
       </a>
     </li>
