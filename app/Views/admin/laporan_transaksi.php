@@ -2,101 +2,50 @@
 
 <?= $this->section('content'); ?>
 
-<?php
-$db = \Config\Database::connect();
-$totalLunas = [];
-?>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+      </div>
 
-<div class="card">
-  <div class="card-header">
-    <button id="print" class="btn btn-default">Print</button>
-    <button onclick="javascript:demoFromHTML();" class="btn btn-danger">Download PDF</button>
-  </div>
-  <div class="card-body">
-    <table id="printTable" class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nama Pelanggan</th>
-          <th>Nama Reklame</th>
-          <th>Keterangan</th>
-          <th>Jenis Pembayaran</th>
-          <th>Total Harga</th>
-          <th>DP Harga</th>
-          <th>Sisa Bayar</th>
-          <th>Lunas</th>
-        </tr>
-      </thead>
-      <tbody>
+      <div class="card-body table-responsive">
+        <div class="row">
+          <div class="col-md-2">
+            <form action="<?= base_url('AdminPanel/laporan_transaksi'); ?>" method="post">
 
-        <?php $i = 1;
-        foreach ($data as $item):
-          $get = $db->table('transaksi_detail_desain')->where('deskripsi_revisi', 'Bukti Bayar DP')->where('id_transaksi', $item['id_transaksi'])->get()->getRowArray();
-          $getLunas = $db->table('transaksi_detail_desain')->where('deskripsi_revisi', 'Bukti Bayar Lunas')->where('id_transaksi', $item['id_transaksi'])->get()->getRowArray();
-          $jenisBayar = 'Lunas';
-          $harga_dp = 'Kosong';
-          $total = $item['harga'] * $item['total_hari_sewa'];
-          $lunas = 'Kosong';
+              <div class="form-group">
+                <label for="">Tampilkan Berdasarkan</label>
+                <select class="form-control" name="views-control" id="views-control">
+                  <option value="bulan">Bulan</option>
+                  <option value="tahun">Tahun</option>
+                </select>
+              </div>
 
+              <div id="bulan" class="form-group">
+                <label for="">Pilih Bulan</label>
+                <input type="month" name="bulan" class="form-control">
+              </div>
 
-          if ($get) {
-            $jenisBayar = 'DP';
-            $harga_dp = 'Rp ' . number_format($total / 2, 0, ',', '.');
-          }
+              <div id="tahun" class="form-group">
+                <label for="">Pilih Tahun</label>
+                <select name="tahun" class="form-control">
+                  <?php if ($data == null): ?>
+                    <option value="2023">2023</option>
+                  <?php endif ?>
+                  <?php foreach ($data as $item): ?>
+                    <option value="<?= $item['tahun']; ?>">
+                      <?= $item['tahun']; ?>
+                    </option>
+                  <?php endforeach ?>
+                </select>
+              </div>
 
-          if ($getLunas) {
-            if (!$get) {
-              $lunas = 'Rp ' . number_format($total, 0, ',', '.');
-              $totalLunas[] = $total;
-            } else {
-              $lunas = $harga_dp;
-              $totalLunas[] = $total / 2;
-            }
-          }
-          ?>
-          <tr>
-            <td>
-              <?= $i++; ?>
-            </td>
-            <td>
-              <?= $item['fullname']; ?>
-            </td>
-            <td>
-              <?= $item['nama_reklame']; ?>
-            </td>
-            <td>
-              <?= $item['status_transaksi']; ?>
-            </td>
-            <td>
-              <?= $jenisBayar; ?>
-            </td>
-            <td>Rp
-              <?= number_format($total, 0, ',', '.'); ?>
-            </td>
-            <td>
-              <?= $harga_dp; ?>
-            </td>
-            <td>
-              <?= $harga_dp; ?>
-            </td>
-            <td>
-              <?= $lunas; ?>
-            </td>
-          </tr>
-        <?php endforeach ?>
-
-      </tbody>
-
-      <tfoot>
-        <tr>
-          <th colspan="8">TOTAL </th>
-          <th>Rp.
-            <?= number_format(array_sum($totalLunas), 0, ',', '.'); ?>
-          </th>
-        </tr>
-      </tfoot>
-
-    </table>
+              <button type="submit" class="btn btn-primary">Tampilkan</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -104,38 +53,30 @@ $totalLunas = [];
 
 <?= $this->section('script'); ?>
 <script>
-  function printData() {
-    var divToPrint = document.getElementById("printTable");
-    newWin = window.open("");
-    newWin.document.write(divToPrint.outerHTML);
-    newWin.print();
-    newWin.close();
-  }
+  $('#tahun').attr('hidden', '')
+  $('#bulan').removeAttr('hidden')
 
-  const btn = document.getElementById("print");
-  btn.addEventListener('click', () => printData())
+  $('#views-control').change(function (e) {
+    e.preventDefault();
+    const views_control = $('#views-control').val();
 
-  function demoFromHTML() {
-    const d = new Date()
-    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober",
-      "November", "December"
-    ];
-    let month = months[d.getMonth()];
-    let fulldate = d.getDate() + ' ' + month + ' ' + d.getFullYear();
-    var doc = new jspdf.jsPDF()
+    switch (views_control) {
+      case 'bulan':
+        $('#tahun').attr('hidden', '')
+        $('#bulan').removeAttr('hidden')
+        break;
 
-    doc.setFontSize(18)
-    doc.text('Laporan Transaksi', 110, 10, 'center')
-    doc.autoTable({
-      html: '#printTable'
-    })
+      case 'tahun':
+        $('#bulan').attr('hidden', '')
+        $('#tahun').removeAttr('hidden')
+        break;
 
-    var finalY = doc.lastAutoTable.finalY
-    doc.setFontSize(12)
-    doc.text('Makassar, ' + fulldate, 140, finalY + 10)
-    doc.text('Admin', 140, finalY + 20)
+      default:
+        $('#tahun').attr('hidden', '')
+        $('#bulan').removeAttr('hidden')
+        break;
+    }
 
-    doc.save('laporan_transaksi.pdf')
-  }
+  });
 </script>
 <?= $this->endSection(); ?>

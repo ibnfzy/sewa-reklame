@@ -164,7 +164,45 @@ class UserController extends BaseController
             $this->request->getFile('gambar')->move('uploads', $namafile);
         }
 
-        $deskripsi = ($this->request->getPost('jenis_pembayaran') == '1') ? 'Bukti Bayar Lunas' : 'Bukti Bayar DP';
+        $deskripsi = ($this->request->getPost('jenis_pembayaran') == '1') ? 'Bukti Bayar Lunas' : 'Bukti Bayar DP 50%';
+
+        $data = [
+            'id_transaksi' => $id,
+            'gambar' => $namafile,
+            'deskripsi_revisi' => $deskripsi,
+            'jenis_post' => 'Upload Bukti Bayar'
+        ];
+
+        $dataTransaksi = [
+            'status_transaksi' => 'Menunggu Validasi ' . $deskripsi
+        ];
+
+        $this->db->table('transaksi')->where('id_transaksi', $id)->update($dataTransaksi);
+
+        $this->db->table('transaksi_detail_desain')->insert($data);
+
+        return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Data berhasil ditambahkan');
+    }
+
+    public function uploadBBDPS($id)
+    {
+        $rules = [
+            'gambar' => 'is_image[gambar]',
+            'jenis_pembayaran' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url('Panel/Transaksi/' . $id))->with('type-status', 'error')->with('dataMessage', $this->validator->getErrors());
+        }
+
+        $extFile = $this->request->getFile('gambar')->guessExtension();
+        $namafile = 'buktibayardp-' . $id . date('-dmY.') . $extFile;
+
+        if (!$this->request->getFile('gambar')->hasMoved()) {
+            $this->request->getFile('gambar')->move('uploads', $namafile);
+        }
+
+        $deskripsi = ($this->request->getPost('jenis_pembayaran') == '1') ? 'Bukti Bayar Lunas' : 'Bukti Bayar DP 20%';
 
         $data = [
             'id_transaksi' => $id,

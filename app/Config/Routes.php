@@ -68,6 +68,7 @@ $routes->group('AdminPanel', ['namespace' => 'App\Controllers'], function ($rout
 
     $routes->get('laporan_cust', 'AdmController::laporan_cust');
     $routes->get('laporan_transaksi', 'AdmController::laporan_transaksi');
+    $routes->post('laporan_transaksi', 'AdmController::render_laporan_transaksi');
 
     $routes->get('Corousel', 'Corousel::index');
     $routes->post('Corousel', 'Corousel::create');
@@ -100,6 +101,7 @@ $routes->group('Panel', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->post('JenisDesain/(:num)', 'UserController::jenis_penyerahan/$1');
     $routes->post('UploadSendiri/(:num)', 'UserController::upload_desain_sendiri/$1');
     $routes->post('UploadBBDP/(:num)', 'UserController::uploadBBDP/$1');
+    $routes->post('UploadBBDPS/(:num)', 'UserController::uploadBBDPS/$1');
     $routes->post('UploadLunas/(:num)', 'UserController::uploadLunas/$1');
     $routes->post('UploadKriteria/(:num)', 'UserController::uploadKriteriaDesain/$1');
     $routes->get('TerimaDesain/(:num)', 'UserController::terima_desain/$1');

@@ -99,9 +99,9 @@ class Home extends BaseController
 
     public function proses_redirect($id)
     {
-        if ($this->request->getPost('hari') < 7) {
-            return redirect()->to(base_url('Reklame/' . $id))->with('type-status', 'error')->with('message', 'Hari sewa minimal 7 Hari');
-        }
+        // if ($this->request->getPost('hari') < 7) {
+        //     return redirect()->to(base_url('Reklame/' . $id))->with('type-status', 'error')->with('message', 'Hari sewa minimal 7 Hari');
+        // }
 
         $date1 = new \DateTime(date('Y-m-d', strtotime($this->request->getPost('tanggal'))));
         $date2 = new \DateTime(date('Y-m-d'));
@@ -114,9 +114,11 @@ class Home extends BaseController
             return redirect()->to(base_url('Reklame/' . $id))->with('type-status', 'error')->with('message', 'Tanggal sewa tidak benar');
         }
 
+        $hari = ($this->request->getPost('hari') * 7) + $this->request->getPost('harid');
+
         session()->set('id_reklame_sewa', $id);
         session()->set('tanggal', $this->request->getPost('tanggal'));
-        session()->set('hari', $this->request->getPost('hari'));
+        session()->set('hari', $hari);
 
         return redirect()->to(base_url('Panel/Proses/' . $id));
     }

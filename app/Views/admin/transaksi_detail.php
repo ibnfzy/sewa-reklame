@@ -4,8 +4,19 @@
 <?php
 $db = \Config\Database::connect();
 $get = $db->table('transaksi_detail_desain')->where('id_transaksi', $data['id_transaksi'])->orderBy('id_transaksi_detail_desain', 'DESC')->get()->getResultArray();
-$total = $data['harga'] * $data['total_hari_sewa'];
+$getFun = new \App\Controllers\AdmController;
+
+$hariminggu = $getFun->hari_ke_minggu($data['total_hari_sewa']);
+$total = $data['harga'] * $hariminggu['minggu'];
+$totalhargahari = ($total / 7) * $hariminggu['hari_lebih'];
 $isUpRefThere = false;
+
+if ($hariminggu['hari_lebih'] <= 0) {
+  $totalwaktu = $hariminggu['minggu'] . ' Minggu ';
+} else {
+  $totalwaktu = $hariminggu['minggu'] . ' Minggu ' . $hariminggu['hari_lebih'] . ' Hari';
+  $total = $total + $totalhargahari;
+}
 
 $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get()->getRowArray();
 ?>
@@ -39,9 +50,9 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
           <div class="col-12 col-sm-4">
             <div class="info-box bg-light">
               <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Total Hari Sewa</span>
+                <span class="info-box-text text-center text-muted">Total Waktu Sewa</span>
                 <span class="info-box-number text-center text-muted mb-0">
-                  <?= $data['total_hari_sewa'] ?> Hari
+                  <?= $totalwaktu ?>
                 </span>
               </div>
             </div>
@@ -51,7 +62,7 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Total Harga Sewa</span>
                 <span class="info-box-number text-center text-muted mb-0">Rp.
-                  <?= number_format($total, 0, ',', '.') . '/' . $data['total_hari_sewa'] ?> Hari
+                  <?= number_format($total, 0, ',', '.') ?>
                 </span>
               </div>
             </div>
@@ -170,7 +181,7 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
             class="btn btn-sm btn-warning">Validasi Desain</a>
           <?php endif ?>
 
-          <?php if ($data['status_transaksi'] == 'Menunggu Validasi Bukti Bayar DP'): ?>
+          <?php if ($data['status_transaksi'] == 'Menunggu Validasi Bukti Bayar DP 50%' || $data['status_transaksi'] == 'Menunggu Validasi Bukti Bayar DP 20%'): ?>
           <a href="<?= base_url('AdminPanel/ValidasiBBDP/' . $data['id_transaksi']); ?>"
             class="btn btn-sm btn-warning">Validasi
             Bukti Bayar DP</a>
@@ -208,7 +219,7 @@ $cust = $db->table('customer')->where('id_customer', $data['id_customer'])->get(
             Sewa Pelanggan</a>
           <?php endif ?>
 
-          <?php if ($data['status_transaksi'] == 'Gagal') : ?>
+          <?php if ($data['status_transaksi'] == 'Gagal'): ?>
           <a href="<?= base_url('AdminPanel/LanjutTransaksi/' . $data['id_transaksi']); ?>"
             class="btn btn-sm btn-danger"
             onclick="confirm('Yakin ingin menyelesaikan transaksi dengan status gagal ini ?')">Selesaikan Transaksi</a>

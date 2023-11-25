@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\Database\RawSql;
 
 class AdmController extends BaseController
 {
@@ -65,9 +66,17 @@ class AdmController extends BaseController
 
     public function validasibbdp($id)
     {
-        $this->db->table('transaksi')->where('id_transaksi', $id)->update([
-            'status_transaksi' => 'Proses Review Tanggal Sewa'
-        ]);
+        $get = $this->db->table('transaksi')->where('id_transaksi', $id)->get()->getRowArray();
+
+        if ($get['status_transaksi'] == 'Menunggu Validasi Bukti Bayar DP 50%') {
+            $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+                'status_transaksi' => 'Proses Review Tanggal Sewa'
+            ]);
+        } else if ($get['status_transaksi'] == 'Menunggu Validasi Bukti Bayar DP 20%') {
+            $this->db->table('transaksi')->where('id_transaksi', $id)->update([
+                'status_transaksi' => 'Menunggu Pelunasan'
+            ]);
+        }
 
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Validasi Bukti Bayar DP');
     }
@@ -255,7 +264,35 @@ class AdmController extends BaseController
     public function laporan_transaksi()
     {
         return view('admin/laporan_transaksi', [
-            'data' => $this->db->query('SELECT * FROM `transaksi`')->getResultArray()
+            'data' => $this->db->table('transaksi')->select(new RawSql('DISTINCT YEAR(tgl_proses_checkout) as tahun'))->get()->getResultArray()
+        ]);
+    }
+
+    public function render_laporan_transaksi()
+    {
+        $type = $this->request->getPost('views-control');
+
+        switch ($type) {
+            case 'bulan':
+                $where = date('Y-m', strtotime($this->request->getPost('bulan')));
+                $date = date('F Y', strtotime($this->request->getPost('bulan')));
+                break;
+
+            case 'tahun':
+                $where = $this->request->getPost('tahun');
+                $date = $this->request->getPost('tahun');
+                break;
+
+            default:
+                $date = $this->request->getPost('bulan');
+                $date = date('l Y', strtotime($this->request->getPost('bulan')));
+                break;
+        }
+
+        return view('admin/render_laporan_transaksi', [
+            'data' => $this->db->table('transaksi')->where('status_transaksi', 'Transaksi Selesai')->like('tgl_proses_checkout', $where, 'right')->orderBy('id_transaksi', 'DESC')->get()->getResultArray(),
+            'type' => $type,
+            'date' => $date
         ]);
     }
 
@@ -266,5 +303,17 @@ class AdmController extends BaseController
         ]);
 
         return redirect()->to(base_url('AdminPanel/Transaksi/' . $id))->with('type-status', 'success')->with('message', 'Berhasil Menyelesaikan Transaksi');
+    }
+
+    function hari_ke_minggu($hari)
+    {
+        // Menghitung minggu dengan pembagian
+        $minggu = floor($hari / 7);
+
+        // Menghitung hari lebih
+        $hari_lebih = $hari % 7;
+
+        // Mengembalikan array dengan minggu dan hari lebih
+        return ['minggu' => $minggu, 'hari_lebih' => $hari_lebih];
     }
 }

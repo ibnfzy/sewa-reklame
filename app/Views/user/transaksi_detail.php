@@ -4,19 +4,33 @@
 <?php
 $db = \Config\Database::connect();
 $get = $db->table('transaksi_detail_desain')->where('id_transaksi', $data['id_transaksi'])->orderBy('id_transaksi_detail_desain', 'DESC')->get()->getResultArray();
-$total = $data['harga'] * $data['total_hari_sewa'];
+$getFun = new \App\Controllers\AdmController;
+
+$hariminggu = $getFun->hari_ke_minggu($data['total_hari_sewa']);
+$total = $data['harga'] * $hariminggu['minggu'];
+$totalhargahari = ($total / 7) * $hariminggu['hari_lebih'];
 $isUpRefThere = false;
 $bayarDP = false;
 $lunas = false;
+$totalDP = 0;
 $informasiToko = $db->table('informasi')->where('id_toko_informasi', 1)->get()->getRowArray();
+$ada20 = false;
+
+if ($hariminggu['hari_lebih'] <= 0) {
+  $totalwaktu = $hariminggu['minggu'] . ' Minggu ';
+} else {
+  $totalwaktu = $hariminggu['minggu'] . ' Minggu ' . $hariminggu['hari_lebih'] . ' Hari';
+  $total = $total + $totalhargahari;
+}
 
 foreach ($get as $mo) {
-  if (in_array('Bukti Bayar DP', $mo)) {
-    $bayarDP = true;
-  }
-
-  if (in_array('Bukti Bayar Lunas', $mo)) {
+  if ($mo['deskripsi_revisi'] == 'Bukti Bayar Lunas') {
     $lunas = true;
+  } elseif ($mo['deskripsi_revisi'] == 'Bukti Bayar DP 20%') {
+    $bayarDP = true;
+    $ada20 = true;
+  } elseif ($mo['deskripsi_revisi'] == 'Bukti Bayar DP 50%') {
+    $bayarDP = true;
   }
 }
 
@@ -61,7 +75,7 @@ foreach ($get as $mo) {
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Total Hari Sewa</span>
                 <span class="info-box-number text-center text-muted mb-0">
-                  <?= $data['total_hari_sewa'] ?> Hari
+                  <?= $totalwaktu ?>
                 </span>
               </div>
             </div>
@@ -71,7 +85,7 @@ foreach ($get as $mo) {
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Total Harga Sewa</span>
                 <span class="info-box-number text-center text-muted mb-0">Rp.
-                  <?= number_format($total, 0, ',', '.') . '/' . $data['total_hari_sewa'] ?> Hari
+                  <?= number_format($total, 0, ',', '.') ?>
                 </span>
               </div>
             </div>
@@ -153,6 +167,16 @@ foreach ($get as $mo) {
           </p>
         </div>
 
+        <?php if ($data['status_transaksi'] == 'Penyerahan Desain Berhasil'): ?>
+          <div class="text-muted">
+            <p class="text-sm">Tanggal Batas Pembayaran DP
+              <b class="d-block">
+                <?= date('m/d/Y', strtotime($data['tgl_sewa'] . ' +1 days')) ?>
+              </b>
+            </p>
+          </div>
+        <?php endif ?>
+
         <?php if ($data['tgl_selesai'] != null): ?>
           <div class="text-muted">
             <p class="text-sm">Tanggal Sewa Selesai
@@ -174,12 +198,14 @@ foreach ($get as $mo) {
           </div>
         <?php endif ?>
 
-        <?php if ($bayarDP == true): ?>
+        <?php if ($bayarDP == true):
+          $totalDP = ($ada20) ? ($total / 2) + ($total * 0.2) : $total / 2;
+          ?>
           <div class="text-muted">
             <p class="text-sm">Total Bayar DP
               <b class="d-block">
                 Rp.
-                <?= number_format($total / 2, 0, ',', '.') ?>
+                <?= number_format($totalDP, 0, ',', '.') ?>
               </b>
             </p>
           </div>
@@ -232,10 +258,16 @@ foreach ($get as $mo) {
               Hasil Desain</a>
           <?php endif ?>
 
-          <?php if ($bayarDP == true && $lunas == false && $data['status_transaksi'] != 'Gagal' && $data['status_transaksi'] != 'Transaksi Selesai'): ?>
-            <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#pelunasan">Upload Bukti
+          <?php if ($bayarDP == true && $lunas == false && $data['status_transaksi'] != 'Gagal' && $data['status_transaksi'] != 'Transaksi Selesai' && $data['status_transaksi'] != 'Menunggu Validasi Bukti Bayar DP 20%' && $data['status_transaksi'] != 'Menunggu Pelunasan' && $data['status_transaksi'] != 'Menunggu Validasi Bukti Bayar DP 50%'): ?>
+            <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#uploadBBS">Upload Bukti
               Pembayaran
-              Pelunasan</a>
+            </a>
+          <?php endif ?>
+
+          <?php if ($data['status_transaksi'] == 'Menunggu Pelunasan'): ?>
+            <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#pelunasan">Upload Bukti
+              Pembayaran Pelunasan
+            </a>
           <?php endif ?>
 
           <?php if ($data['status_transaksi'] == 'Transaksi Selesai' && $testi == 0): ?>
@@ -368,8 +400,47 @@ foreach ($get as $mo) {
           enctype="multipart/form-data">
           <div class="modal-body">
             <div class="form-group">
+              <label>Total Pelunasan Rp
+                <?= number_format($total - $totalDP, 0, ',', '.'); ?>
+              </label>
+              <input type="file" class="form-control" name="gambar">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-primary">Proses</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="uploadBBS" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="penyerahanDesainLabel">Upload Bukti Bayar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="<?= base_url('Panel/UploadBBDPS/' . $data['id_transaksi']); ?>" method="post"
+          enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="form-group">
               <label>Upload</label>
               <input type="file" class="form-control" name="gambar">
+            </div>
+            <div class="form-group">
+              <label>Jenis Pembayaran</label>
+              <select name="jenis_pembayaran" id="bintang" class="form-control">
+                <option value="1">Bayar Lunas Rp.
+                  <?= number_format($total / 2, 0, ',', '.'); ?>
+                </option>
+                <option value="2">Bayar DP 20% Rp.
+                  <?= number_format($total * 0.2, 0, ',', '.'); ?>
+                </option>
+              </select>
             </div>
           </div>
           <div class="modal-footer">

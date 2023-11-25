@@ -79,14 +79,25 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
           <div class="clear"> </div>
         </div>
         <div class="col-md-3">
-          <div class="box-info-product">
-            <p class="price2">Rp.
-              <?= number_format($harga, 0, ',', '.'); ?>
-            </p>
-            <form action="<?= base_url('Proses/' . $data['id_reklame']) ?>" method="POST">
+          <form action="<?= base_url('Proses/' . $data['id_reklame']) ?>" method="POST">
+            <div class="box-info-product">
+              <ul style="padding: 0;" class="form-group">
+                <!-- <span>Tipe :</span> -->
+                <select name="tipe" class="form-control" id="tipe">
+                  <option value="1">Per minggu</option>
+                  <option value="2">Per minggu + hari</option>
+                </select>
+              </ul>
+              <p class="price2">Rp.
+                <?= number_format($harga, 0, ',', '.'); ?>
+              </p>
               <ul class="prosuct-qty">
-                <span>/ Hari:</span>
-                <input onchange="hari_change()" type="text" name="hari" id="hari" value="7" class="form-control">
+                <span>/ Minggu:</span>
+                <input type="text" name="hari" id="hari" value="1" class="form-control">
+              </ul>
+              <ul id="harid" class="prosuct-qty" hidden>
+                <span>+ Hari:</span>
+                <input type="text" name="harid" id="" value="0" class="form-control">
               </ul>
               <ul class="prosuct-qty">
                 <span>Tanggal Sewa:</span>
@@ -97,8 +108,8 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
                 class="btn btn-danger">
                 <span>Sewa</span>
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
       <div class="desc">
@@ -146,13 +157,24 @@ if (session()->get('jenis_customer') != null && session()->get('jenis_customer')
     }
   }
 
-  function hari_change() {
-    hari = $('#hari').val();
+  $('#tipe').change(function (e) {
+    e.preventDefault();
+    const views_control = $('#tipe').val();
 
-    if (hari < 7) {
-      $('#hari').val(7)
-      return toastr['error']('Hari sewa minimal 7 Hari');
+    switch (views_control) {
+      case '1':
+        $('#harid').attr('hidden', '')
+        break;
+
+      case '2':
+        $('#harid').removeAttr('hidden')
+        break;
+
+      default:
+        $('#harid').attr('hidden', '')
+        break;
     }
-  }
+
+  });
 </script>
 <?= $this->endSection(); ?>
